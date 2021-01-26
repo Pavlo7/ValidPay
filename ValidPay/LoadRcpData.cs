@@ -341,7 +341,7 @@ namespace ValidPay
                             {
                                 
 
-                               
+
 
                                 if (backgroundWorker1.CancellationPending)
                                 {
@@ -361,7 +361,7 @@ namespace ValidPay
                             }
 
 
-
+                               
                         }
                         //if (!SetData(data, sender, e, out msg, emt) ) { log.LogLine(msg); continue; }
 
