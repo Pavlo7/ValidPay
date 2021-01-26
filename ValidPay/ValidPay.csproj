@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83AFEEA9-4486-48CB-9EC1-609EC214178B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ValidPay</RootNamespace>
+    <AssemblyName>ValidPay</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=10.2.0.100, Culture=neutral, PublicKeyToken=89b483f429c47342">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\XEClient\bin\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>bin\Debug\System.IO.Compression.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox1.Designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AssistViewData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssistViewData.Designer.cs">
+      <DependentUpon>AssistViewData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BelWebViewData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BelWebViewData.Designer.cs">
+      <DependentUpon>BelWebViewData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CAssistData.cs" />
+    <Compile Include="CBelWebData.cs" />
+    <Compile Include="CBGPBmobileData.cs" />
+    <Compile Include="CConfig.cs" />
+    <Compile Include="CEmitent.cs" />
+    <Compile Include="CRcpData.cs" />
+    <Compile Include="CValidData.cs" />
+    <Compile Include="ExportToExcelDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportToExcelDlg.designer.cs">
+      <DependentUpon>ExportToExcelDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadMobileAppData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadMobileAppData.Designer.cs">
+      <DependentUpon>LoadMobileAppData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutReestrRcp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutReestrRcp.Designer.cs">
+      <DependentUpon>OutReestrRcp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RCPViewData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RCPViewData.Designer.cs">
+      <DependentUpon>RCPViewData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadAmout300.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadAmout300.Designer.cs">
+      <DependentUpon>LoadAmout300.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadAssistCsvFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadAssistCsvFile.Designer.cs">
+      <DependentUpon>LoadAssistCsvFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadAssistFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadAssistFile.Designer.cs">
+      <DependentUpon>LoadAssistFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadPayment.Designer.cs">
+      <DependentUpon>LoadPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadRcpData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadRcpData.Designer.cs">
+      <DependentUpon>LoadRcpData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadReestrBelWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadReestrBelWeb.Designer.cs">
+      <DependentUpon>LoadReestrBelWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadWebPayFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadWebPayFile.Designer.cs">
+      <DependentUpon>LoadWebPayFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadWebPayFileProcessing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadWebPayFileProcessing.Designer.cs">
+      <DependentUpon>LoadWebPayFileProcessing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatmetProc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatmetProc.designer.cs">
+      <DependentUpon>StatmetProc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateContract.Designer.cs">
+      <DependentUpon>UpdateContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <Compile Include="Valid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Valid.Designer.cs">
+      <DependentUpon>Valid.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AssistViewData.resx">
+      <DependentUpon>AssistViewData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BelWebViewData.resx">
+      <DependentUpon>BelWebViewData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportToExcelDlg.resx">
+      <DependentUpon>ExportToExcelDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadAmout300.resx">
+      <DependentUpon>LoadAmout300.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadAssistCsvFile.resx">
+      <DependentUpon>LoadAssistCsvFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadAssistFile.resx">
+      <DependentUpon>LoadAssistFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadMobileAppData.resx">
+      <DependentUpon>LoadMobileAppData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadPayment.resx">
+      <DependentUpon>LoadPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadRcpData.resx">
+      <DependentUpon>LoadRcpData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadReestrBelWeb.resx">
+      <DependentUpon>LoadReestrBelWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadWebPayFile.resx">
+      <DependentUpon>LoadWebPayFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadWebPayFileProcessing.resx">
+      <DependentUpon>LoadWebPayFileProcessing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutReestrRcp.resx">
+      <DependentUpon>OutReestrRcp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RCPViewData.resx">
+      <DependentUpon>RCPViewData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatmetProc.resx">
+      <DependentUpon>StatmetProc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateContract.resx">
+      <DependentUpon>UpdateContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Valid.resx">
+      <DependentUpon>Valid.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
