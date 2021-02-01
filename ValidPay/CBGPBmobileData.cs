@@ -79,7 +79,7 @@ namespace ValidPay
                     if (s.Code == 305) { ret = s; return ret; };
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
             return ret;
         }
 
@@ -126,6 +126,7 @@ namespace ValidPay
             return ret;
         }
 
+        [Obsolete]
         public int InsertRow(OracleConnection connection, BGPBmobileRow item, out string msg)
         {
             int ret = 0;

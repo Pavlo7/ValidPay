@@ -13,14 +13,13 @@ namespace ValidPay
     {
         CConfig config;
         XLog log;
-        STVPAssistData param;
+        private STVPAssistData param;
         DataTable table;
         StatmetProc process;
         TamplateGrid tamplategrid;
 
         CAssistData clWork;
-
-        int s_index;
+              
         int iRow;
 
         public AssistViewData(CConfig cf)

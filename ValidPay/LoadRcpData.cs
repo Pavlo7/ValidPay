@@ -328,8 +328,6 @@ namespace ValidPay
 
                         if (data.Count > 0)
                         {
-                           
-
                             // удаляем период
                             delete_data(emt.code, connection);
 
@@ -339,10 +337,6 @@ namespace ValidPay
 
                             foreach (STRowRcpData item in data)
                             {
-                                
-
-
-
                                 if (backgroundWorker1.CancellationPending)
                                 {
                                     //  transaction.Rollback();
@@ -359,9 +353,6 @@ namespace ValidPay
                                 //      double f = Math.Round((double)(i / cnt * 100.0));
                                 backgroundWorker1.ReportProgress((int)d);
                             }
-
-
-                               
                         }
                         //if (!SetData(data, sender, e, out msg, emt) ) { log.LogLine(msg); continue; }
 

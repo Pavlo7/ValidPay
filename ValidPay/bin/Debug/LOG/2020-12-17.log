@@ -1,0 +1,18 @@
+﻿10:47:50 File wasn't read.
+10:49:49 File wasn't read.
+10:50:29 File wasn't read.
+10:51:29 File wasn't read.
+10:59:09 File wasn't read.
+11:02:14 File wasn't read.
+14:27:27 CAssistData.GetTable() ORA-00903: invalid table name
+
+14:30:04 CAssistData.GetTable() ORA-00933: SQL command not properly ended
+
+14:31:14 CAssistData.GetTable() ORA-00933: SQL command not properly ended
+
+14:34:01 CAssistData.GetTable() ORA-00933: SQL command not properly ended
+
+14:35:54 CAssistData.GetTable() ORA-00942: table or view does not exist
+
+14:37:44 CAssistData.GetTable() ORA-00904: "FILENAMET": invalid identifier
+

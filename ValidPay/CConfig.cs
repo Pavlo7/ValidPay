@@ -114,13 +114,14 @@ namespace ValidPay
             bool ret = false;
             try
             {
-                OracleConnection connet = new OracleConnection(cs);
-                
-                connet.Open();
-                if (connet.State == ConnectionState.Open)
+                using (OracleConnection connet = new OracleConnection(cs))
                 {
-                    ret = true;
-                    connet.Close();
+                    connet.Open();
+                    if (connet.State == ConnectionState.Open)
+                    {
+                        ret = true;
+                        connet.Close();
+                    }
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }

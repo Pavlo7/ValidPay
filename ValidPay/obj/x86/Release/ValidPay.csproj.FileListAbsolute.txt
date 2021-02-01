@@ -1,0 +1,17 @@
+D:\Project\ValidPay\ValidPay\bin\Release\ValidPay.exe.config
+D:\Project\ValidPay\ValidPay\bin\Release\ValidPay.exe
+D:\Project\ValidPay\ValidPay\bin\Release\ValidPay.pdb
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.AboutBox1.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.Form1.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.LoadAssistFile.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.LoadRcpData.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.LoadWebPayFile.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.LoadWebPayFileProcessing.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.Properties.Resources.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.StatmetProc.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.UpdateContract.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.Valid.resources
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.csproj.GenerateResource.Cache
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.exe
+D:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.pdb
+d:\Project\ValidPay\ValidPay\obj\x86\Release\ValidPay.csprojResolveAssemblyReference.cache

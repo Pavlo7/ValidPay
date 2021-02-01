@@ -1,0 +1,28 @@
+﻿08:20:20 Индекс (отсчитываемый от нуля) должен быть больше или равен нулю, но меньше размера списка аргументов.
+09:20:29 РУП "Белоруснефть-Гомельоблнефтепродукт": 16221 rows prepare to writing
+09:27:22 Neither record was written to database.
+09:27:22 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+09:30:18 РУП "Белоруснефть-Брестоблнефтепродукт": 10801 rows prepare to writing
+09:37:49 РУП "Белоруснефть-Витебскоблнефтепродукт": 7207 rows prepare to writing
+09:42:47 РУП "Белоруснефть-Гомельоблнефтепродукт": 16221 rows prepare to writing
+09:47:04 Neither record was written to database.
+09:47:04 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+09:47:13 РУП "Белоруснефть-Гроднооблнефтепродукт": 9801 rows prepare to writing
+09:53:50 ОАО "Лиданефтепродукт": 1453 rows prepare to writing
+09:54:56 РУП "Белоруснефть-Минскоблнефтепродукт": 17278 rows prepare to writing
+10:07:25 РУП "Белоруснефть-Минскавтозаправка": 41490 rows prepare to writing
+10:11:02 
+10:15:35 РУП "Белоруснефть-Брестоблнефтепродукт": 16779 rows prepare to writing
+10:26:58 РУП "Белоруснефть-Витебскоблнефтепродукт": 11451 rows prepare to writing
+10:34:37 РУП "Белоруснефть-Гомельоблнефтепродукт": 24951 rows prepare to writing
+10:42:40 Neither record was written to database.
+10:42:40 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+10:42:49 РУП "Белоруснефть-Гроднооблнефтепродукт": 15164 rows prepare to writing
+10:53:14 ОАО "Лиданефтепродукт": 2260 rows prepare to writing
+10:54:55 РУП "Белоруснефть-Минскоблнефтепродукт": 27591 rows prepare to writing
+11:14:44 РУП "Белоруснефть-Минскавтозаправка": 65313 rows prepare to writing
+11:59:22 ОАО "Пуховичинефтепродукт": 2303 rows prepare to writing
+12:01:09 РУП "Белоруснефть-Могилевоблнефтепродукт": 11575 rows prepare to writing

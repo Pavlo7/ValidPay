@@ -13,7 +13,7 @@ namespace ValidPay
     {
         CConfig config;
         XLog log;
-        STVPBelWebData param;
+        private STVPBelWebData param;
         DataTable table;
         StatmetProc process;
         TamplateGrid tamplategrid;

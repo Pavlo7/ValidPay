@@ -1,0 +1,103 @@
+﻿08:09:47 РУП "Белоруснефть-Брестоблнефтепродукт": 20040 rows prepare to writing
+08:20:40 РУП "Белоруснефть-Витебскоблнефтепродукт": 13013 rows prepare to writing
+08:27:59 РУП "Белоруснефть-Гомельоблнефтепродукт": 29479 rows prepare to writing
+08:41:11 Neither record was written to database.
+08:41:11 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+08:41:27 РУП "Белоруснефть-Гроднооблнефтепродукт": 18277 rows prepare to writing
+08:51:24 ОАО "Лиданефтепродукт": 2722 rows prepare to writing
+08:53:03 РУП "Белоруснефть-Минскоблнефтепродукт": 30937 rows prepare to writing
+09:10:34 РУП "Белоруснефть-Минскавтозаправка": 75018 rows prepare to writing
+09:51:05 ОАО "Пуховичинефтепродукт": 2454 rows prepare to writing
+09:52:30 РУП "Белоруснефть-Могилевоблнефтепродукт": 13543 rows prepare to writing
+10:07:32 РУП "Белоруснефть-Брестоблнефтепродукт": 1128 rows prepare to writing
+10:08:21 РУП "Белоруснефть-Витебскоблнефтепродукт": 729 rows prepare to writing
+10:08:52 РУП "Белоруснефть-Гомельоблнефтепродукт": 1591 rows prepare to writing
+10:09:46 РУП "Белоруснефть-Гроднооблнефтепродукт": 967 rows prepare to writing
+10:10:17 ОАО "Лиданефтепродукт": 139 rows prepare to writing
+10:10:22 РУП "Белоруснефть-Минскоблнефтепродукт": 1790 rows prepare to writing
+10:11:23 РУП "Белоруснефть-Минскавтозаправка": 4230 rows prepare to writing
+10:13:43 ОАО "Пуховичинефтепродукт": 152 rows prepare to writing
+10:13:49 РУП "Белоруснефть-Могилевоблнефтепродукт": 767 rows prepare to writing
+10:15:40 РУП "Белоруснефть-Гомельоблнефтепродукт": 28238 rows prepare to writing
+10:24:00 Neither record was written to database.
+10:24:00 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+10:59:54 File wasn't read.
+11:06:35 File wasn't read.
+11:22:42 File wasn't read.
+11:25:29 Ошибка чтения в строке 1, Неверный формат поля даты)
+11:27:43 Ошибка чтения в строке 1, Неверный формат поля даты)
+11:32:50 Ошибка чтения в строке 1, Неверный формат поля даты)
+11:34:11 File wasn't read.
+11:35:20 File wasn't read.
+13:49:00 РУП "Белоруснефть-Брестоблнефтепродукт": 2559 rows prepare to writing
+13:53:09 РУП "Белоруснефть-Брестоблнефтепродукт": 2559 rows prepare to writing
+13:54:37 РУП "Белоруснефть-Витебскоблнефтепродукт": 1693 rows prepare to writing
+13:55:33 РУП "Белоруснефть-Гомельоблнефтепродукт": 3799 rows prepare to writing
+13:56:14 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+13:57:41 РУП "Белоруснефть-Гроднооблнефтепродукт": 2222 rows prepare to writing
+13:58:56 ОАО "Лиданефтепродукт": 334 rows prepare to writing
+13:59:08 РУП "Белоруснефть-Минскоблнефтепродукт": 4229 rows prepare to writing
+14:01:32 РУП "Белоруснефть-Минскавтозаправка": 10322 rows prepare to writing
+14:07:12 ОАО "Пуховичинефтепродукт": 347 rows prepare to writing
+14:07:24 РУП "Белоруснефть-Могилевоблнефтепродукт": 1744 rows prepare to writing
+14:23:43 РУП "Белоруснефть-Брестоблнефтепродукт": 5237 rows prepare to writing
+14:26:33 РУП "Белоруснефть-Витебскоблнефтепродукт": 3566 rows prepare to writing
+14:28:34 РУП "Белоруснефть-Гомельоблнефтепродукт": 7858 rows prepare to writing
+14:29:01 ORA-01400: cannot insert NULL into ("RCD"."VALID_RCPDATA"."RRN")
+
+14:32:59 РУП "Белоруснефть-Гроднооблнефтепродукт": 4785 rows prepare to writing
+14:35:38 ОАО "Лиданефтепродукт": 702 rows prepare to writing
+14:36:10 РУП "Белоруснефть-Минскоблнефтепродукт": 8639 rows prepare to writing
+14:41:09 РУП "Белоруснефть-Минскавтозаправка": 19665 rows prepare to writing
+14:52:00 ОАО "Пуховичинефтепродукт": 725 rows prepare to writing
+14:52:25 РУП "Белоруснефть-Могилевоблнефтепродукт": 3491 rows prepare to writing
+14:57:41 Ошибка чтения в строке 170, )
+14:57:41 Ошибка чтения в строке 171, )
+14:57:41 Ошибка чтения в строке 172, )
+14:57:41 Ошибка чтения в строке 173, )
+15:00:51 Ошибка чтения в строке 170, )
+15:00:51 Ошибка чтения в строке 171, )
+15:00:51 Ошибка чтения в строке 172, )
+15:00:51 Ошибка чтения в строке 173, )
+15:01:43 Ошибка чтения в строке 170, )
+15:01:43 Ошибка чтения в строке 171, )
+15:01:43 Ошибка чтения в строке 172, )
+15:01:43 Ошибка чтения в строке 173, )
+15:03:18 Ошибка чтения в строке 170, )
+15:03:18 Ошибка чтения в строке 171, )
+15:03:18 Ошибка чтения в строке 172, )
+15:03:18 Ошибка чтения в строке 173, )
+15:04:11 Ошибка чтения в строке 170, )
+15:04:11 Ошибка чтения в строке 171, )
+15:04:11 Ошибка чтения в строке 172, )
+15:04:11 Ошибка чтения в строке 173, )
+15:05:55 CAssistData.GetTable() ORA-00942: table or view does not exist
+
+15:06:26 CAssistData.GetTable() ORA-00942: table or view does not exist
+
+15:11:48 CAssistData.GetTable() ORA-00942: table or view does not exist
+
+15:13:38 CAssistData.GetTable() ORA-00942: table or view does not exist
+
+15:17:28 CAssistData.GetTable() ORA-00942: table or view does not exist
+
+15:19:16 CAssistData.GetTable() ORA-00904: "T1"."DD": invalid identifier
+
+15:22:03 CRcpData.GetTable() ORA-00904: "T1"."DD": invalid identifier
+
+15:24:15 CRcpData.GetTable() ORA-00904: "T2"."AMOUNTPC": invalid identifier
+
+15:25:03 CRcpData.GetTable() ORA-00904: "T2"."AMOUNT_PC": invalid identifier
+
+16:07:07 РУП "Белоруснефть-Брестоблнефтепродукт": 13233 rows prepare to writing
+16:14:42 РУП "Белоруснефть-Витебскоблнефтепродукт": 8366 rows prepare to writing
+16:19:37 РУП "Белоруснефть-Гомельоблнефтепродукт": 19205 rows prepare to writing
+16:30:33 РУП "Белоруснефть-Гроднооблнефтепродукт": 12077 rows prepare to writing
+16:37:18 ОАО "Лиданефтепродукт": 1835 rows prepare to writing
+16:38:28 РУП "Белоруснефть-Минскоблнефтепродукт": 19743 rows prepare to writing
+16:49:42 Время ожидания выполнения истекло. Время ожидания истекло до завершения операции, или сервер не отвечает.
+16:49:51 ОАО "Пуховичинефтепродукт": 1542 rows prepare to writing
+16:50:47 РУП "Белоруснефть-Могилевоблнефтепродукт": 8952 rows prepare to writing

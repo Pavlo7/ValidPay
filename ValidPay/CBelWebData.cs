@@ -30,21 +30,20 @@ namespace ValidPay
         {
             int ret = 0;
             msg = null;
-            OracleConnection connet = new OracleConnection();
-
             table = new DataTable("MAIN");
-            
             try
             {
-                connet = new OracleConnection(config.connectionstring);
-                connet.Open();
-                if (connet.State != ConnectionState.Open) { log.LogLine(string.Format("No connection to DB Oracle. CS: {0}", config.connectionstring)); return 1; }
+                using (OracleConnection connet = new OracleConnection(config.connectionstring))
+                {
+                    connet.Open();
+                    if (connet.State != ConnectionState.Open) { log.LogLine(string.Format("No connection to DB Oracle. CS: {0}", config.connectionstring)); return 1; }
 
-                string query = string.Format("SELECT FileName, SUM(AMOUNT) AS AMOUNT, SUM(FEEAMOUNT) AS COMISSION from Rcd.VALID_BELWEBDATA  group by FileName order by FileName ");
+                    string query = string.Format("SELECT FileName, SUM(AMOUNT) AS AMOUNT, SUM(FEEAMOUNT) AS COMISSION from Rcd.VALID_BELWEBDATA  group by FileName order by FileName ");
 
-                OracleCommand cmd = new OracleCommand(query, connet);
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
-                da.Fill(table);
+                    OracleCommand cmd = new OracleCommand(query, connet);
+                    OracleDataAdapter da = new OracleDataAdapter(cmd);
+                    da.Fill(table);
+                }
             }
             catch (Exception ex) { log.LogLine("CBelWebData.GetTable() " + ex.Message); ret = -1; msg = ex.Message; }
             return ret;
