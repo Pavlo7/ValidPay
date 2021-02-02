@@ -56,6 +56,7 @@
             this.columnHeader2});
             this.listViewData.GridLines = true;
             this.listViewData.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewData.HideSelection = false;
             this.listViewData.Location = new System.Drawing.Point(12, 73);
             this.listViewData.Name = "listViewData";
             this.listViewData.Size = new System.Drawing.Size(532, 351);
@@ -118,7 +119,7 @@
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 37;
-            this.buttonExit.Text = "Отмена";
+            this.buttonExit.Text = "Выход";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 

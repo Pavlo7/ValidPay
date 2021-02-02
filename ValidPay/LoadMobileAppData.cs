@@ -11,6 +11,7 @@ using System.Threading;
 using System.Data.OracleClient;
 using System.IO.Compression;
 
+
 namespace ValidPay
 {
     public struct STFileData
@@ -40,7 +41,11 @@ namespace ValidPay
 
         object clWork;
 
+        int cr;
+
         CBGPBmobileData clBGPBmobile;
+        CBelWebData clUP;
+        CAssistData clAssist;
 
         public LoadMobileAppData(CConfig cf)
         {
@@ -57,10 +62,11 @@ namespace ValidPay
             log.DirName = config.logpath;
 
             clBGPBmobile = new CBGPBmobileData(config);
+            clUP = new CBelWebData(config);
+            clAssist = new CAssistData(config);
 
+            cr = 1;
             init_combo();
-
-          
 
             if (config.reloadflag == 1) checkBoxReload.Checked = true;
             else checkBoxReload.Checked = false;
@@ -75,13 +81,11 @@ namespace ValidPay
             {
                 foreach(MA m_app in config.madata)
                     comboBoxApp.Items.Add(m_app.Name);
-
-//                if (comboBoxApp.Items.Count > 0)
-//                   comboBoxApp.Text = comboBoxApp.Items[0].ToString();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message);}
         }
 
+        [Obsolete]
         private void comboBoxApp_SelectedIndexChanged(object sender, EventArgs e)
         {
             string msg = null;
@@ -108,21 +112,18 @@ namespace ValidPay
             catch (Exception ex) { msg = ex.Message; return -1; }
             return ret;
         }
-        
+
+        [Obsolete]
         private void init_proc(MA m_app)
         {
             switch (m_app.Code)
             {
-                //case 300:
-                //    CBGPBmobileData cl = new CBGPBmobileData(config);
-                //    clWork = new CBGPBmobileData(config); ;
-                //    lst_loadedfile = cl.get_loaded_file();
-                //    break;
-                //case 305:
-                //    CBGPBmobileData cl = new CBGPBmobileData(config);
-                 //   clWork = new CBGPBmobileData(config); ;
-                 //   lst_loadedfile = cl.get_loaded_file();
-                 //   break;
+                case 300:
+                    lst_loadedfile = clAssist.get_loaded_file();
+                    break;
+                case 306:
+                    lst_loadedfile = clUP.get_loaded_file();
+                    break;
                 case 305:
                     lst_loadedfile = clBGPBmobile.get_loaded_file();
                     break;
@@ -153,7 +154,7 @@ namespace ValidPay
                     // checkedListBoxFiles.Items.Add(filename, true);
                 }
 
-                init_list();
+                if (files.Length> 0) init_list();
             }
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -175,6 +176,7 @@ namespace ValidPay
                 {
                     AddItemToList(item);
                 }
+                if(cr>0) listViewData.Items[cr-1].EnsureVisible();
             }
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -216,8 +218,10 @@ namespace ValidPay
             backgroundWorker1.RunWorkerAsync();
         }
 
+        [Obsolete]
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            
             StartProc(sender, e);
         }
 
@@ -253,21 +257,29 @@ namespace ValidPay
             buttonOK.Enabled = true;
         }
 
+        [Obsolete]
         private void StartProc(object sender, DoWorkEventArgs e)
         {
             string msg = null;
             try
             {
-
+                cr = 0;
                 foreach (STFileData file in lst_filedata)
                 {
-
+                    
                     if (file.status == 0 || (file.status == 2 && reloadflag))
                     {
                         curr_file = file;
                         //c_date = getfiledate(curr_file.filename);
                         switch(m_app.Code)
                         {
+                            case 300:
+                                {
+                                    List<STRowAssistDataCsv> container1 = new List<STRowAssistDataCsv>();
+                                    if (clAssist.ReadFile(file.filename, out container1, out msg) != 0) { log.LogLine(msg); lst_filedata = change_status_file(file.filename, 1, msg); }
+                                    else if (load_file1(sender, e, container1, file.filename, out msg) != 0) log.LogLine(msg);
+                                }
+                                break;
                             case 305:
                                 {
                                     List<BGPBmobileRow> container3 = new List<BGPBmobileRow>();
@@ -275,16 +287,80 @@ namespace ValidPay
                                     else if (load_file3(sender, e, container3, out msg) != 0) log.LogLine(msg);
                                 }
                                 break;
+                            case 306:
+                                {
+                                    JFile jfile = new JFile();
+                                    if (clUP.ReadFile(file.filename, out jfile, out msg) != 0) { log.LogLine(msg); lst_filedata = change_status_file(file.filename, 1, msg); }
+                                    else if (load_file2(sender, e, jfile, file.filename, out msg) != 0) log.LogLine(msg);
+                                }
+                                break;
                         }
+
+                        
                     }
+
+                    cr++;
                 }
 
-                if (moveflag) MoveFiles();
+                if (moveflag) MoveFiles(m_app.PathIN, m_app.PathArch);
             }
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private int load_file3(object sender, DoWorkEventArgs e, List<BGPBmobileRow> container, out string msg)
+        [Obsolete]
+        private int load_file1(object sender, DoWorkEventArgs e, List<STRowAssistDataCsv> container, string filename, out string msg)
+        {
+            msg = null;
+
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
+
+                    lst_filedata = change_status_file(curr_file.filename, 3, "запись файла ...");
+                    backgroundWorker1.ReportProgress(0);
+
+                    int pc = 0;
+                    int i = 0;
+                    int cnt = container.Count;
+
+                    if (container.Count <= 0) { msg = "Пустой файл"; return 1; }
+
+                    clAssist.DeleteFile(filename, out msg);
+
+                    int cntrows = 0;
+
+                    foreach (STRowAssistDataCsv item in container)
+                    {
+                        if (backgroundWorker1.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            backgroundWorker1.ReportProgress(0);
+                            return 3;
+                        }
+
+                        clAssist.InsertRow(connection, item, out msg);
+
+                        i += 1;
+                        double d = ((i * 1.0) / cnt) * 100;
+
+                        if (d < 100) backgroundWorker1.ReportProgress((int)d);
+
+                        cntrows++;
+
+                    }
+
+                    lst_filedata = change_status_file(curr_file.filename, 2, string.Format("ок ({0} rows)", cntrows));
+                }
+                backgroundWorker1.ReportProgress(100);
+            }
+            catch (Exception ex) { msg = ex.Message; return -1; }
+            return 0;
+        }
+
+        [Obsolete]
+        private int load_file2(object sender, DoWorkEventArgs e, JFile jfile, string filename, out string msg)
         {
             msg = null;
 
@@ -299,15 +375,15 @@ namespace ValidPay
 
                 int pc = 0;
                 int i = 0;
-                int cnt = container.Count;
+                int cnt = jfile.rows.Count;
 
-                if (container.Count <= 0) { msg = "Пустой файл"; return 1; }
+                if (cnt <= 0) { msg = "Пустой файл"; return 1; }
 
-                clBGPBmobile.DeleteFile( out msg);
+                clUP.DeleteFile(filename, out msg);
 
                 int cntrows = 0;
 
-                foreach (BGPBmobileRow item in container)
+                foreach (UPRow item in jfile.rows)
                 {
                     if (backgroundWorker1.CancellationPending)
                     {
@@ -316,8 +392,8 @@ namespace ValidPay
                         return 3;
                     }
 
-                    clBGPBmobile.InsertRow(connection, item, out msg);
-                  
+                    clUP.InsertRow(connection, item, jfile.orderNumber, filename, out msg);
+
                     i += 1;
                     double d = ((i * 1.0) / cnt) * 100;
 
@@ -330,19 +406,73 @@ namespace ValidPay
                 lst_filedata = change_status_file(curr_file.filename, 2, string.Format("ок ({0} rows)", cntrows));
                 backgroundWorker1.ReportProgress(100);
             }
+            catch (Exception ex) { msg = ex.Message; return -1; }
+            return 0;
+        }
+
+        [Obsolete]
+        private int load_file3(object sender, DoWorkEventArgs e, List<BGPBmobileRow> container, out string msg)
+        {
+            msg = null;
+
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
+
+                    lst_filedata = change_status_file(curr_file.filename, 3, "запись файла ...");
+                    backgroundWorker1.ReportProgress(0);
+
+
+                    int pc = 0;
+                    int i = 0;
+                    int cnt = container.Count;
+
+                    if (container.Count <= 0) { msg = "Пустой файл"; return 1; }
+
+                    clBGPBmobile.DeleteFile(out msg);
+
+                    int cntrows = 0;
+
+                    foreach (BGPBmobileRow item in container)
+                    {
+                        if (backgroundWorker1.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            backgroundWorker1.ReportProgress(0);
+                            return 3;
+                        }
+
+                        clBGPBmobile.InsertRow(connection, item, out msg);
+
+                        i += 1;
+                        double d = ((i * 1.0) / cnt) * 100;
+
+                        if (d < 100) backgroundWorker1.ReportProgress((int)d);
+
+                        cntrows++;
+
+                    }
+
+                    lst_filedata = change_status_file(curr_file.filename, 2, string.Format("ок ({0} rows)", cntrows));
+                }
+                backgroundWorker1.ReportProgress(100);
+            }
             catch (Exception ex)   { msg = ex.Message; return -1;}
             return 0;
         }
 
-        private void MoveFiles()
+
+        private void MoveFiles(string pathin, string pathout)
         {
             try
             {
-                string zipname = string.Format("{0}.zip", DateTime.Now.ToString("yyyy-mm-dd_HH-mm-ss"));
-                string pathzip = Path.Combine(config.archpathassistcsv, zipname);
-           //     ZipFile.CreateFromDirectory(config.inpathassistcsv, pathzip);
+                string zipname = string.Format("{0}_{1}.zip", m_app.Name, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+                string pathzip = Path.Combine(pathout, zipname);
+                ZipFile.CreateFromDirectory(pathin, pathzip);
 
-                DirectoryInfo myDirInfo = new DirectoryInfo(config.inpathassistcsv);
+                DirectoryInfo myDirInfo = new DirectoryInfo(pathin);
 
                 foreach (FileInfo file in myDirInfo.GetFiles())
                 {

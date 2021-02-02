@@ -202,7 +202,7 @@ namespace ValidPay
             try
             {
                 OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();
+                connection.Open();   
 
                 string query = "INSERT INTO RCD.VALID_AMOUNT_PC ( PDATE, APPCODE, AMOUNT) values (:1, :2, :3)";
                 OracleCommand command = new OracleCommand(query, connection);
@@ -215,7 +215,7 @@ namespace ValidPay
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void update_row(STRowAmountPC item)
+        private void update_row(STRowAmountPC item)    
         {
             try
             {

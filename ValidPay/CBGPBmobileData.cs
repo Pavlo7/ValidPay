@@ -83,30 +83,34 @@ namespace ValidPay
             return ret;
         }
 
+        [Obsolete]
         public List<string> get_loaded_file()
         {
             List<string> ret = new List<string>();
             try
             {
                 string query = string.Format("SELECT FILENAME FROM Rcd.VALID_BGPBMobileDATA GROUP BY FILENAME");
-                OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();
-
-                OracleCommand cmd = new OracleCommand(query, connection);
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
                 {
-                    while (reader.Read())
-                        ret.Add(reader.GetString(0));
-                }
+                    connection.Open();
 
-                reader.Dispose();
+                    OracleCommand cmd = new OracleCommand(query, connection);
+                    OracleDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                            ret.Add(reader.GetString(0));
+                    }
+
+                    reader.Dispose();
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             return ret;
         }
 
+        [Obsolete]
         public int DeleteFile(out string msg)
         {
             int ret = 0;
@@ -115,12 +119,14 @@ namespace ValidPay
             {
                 string query = string.Format("DELETE FROM Rcd.VALID_BGPBMobileDATA WHERE SHIFTDATE>=:1 AND SHIFTDATE<=:2");
 
-                OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();
-                OracleCommand cmd = new OracleCommand(query, connection);
-                cmd.Parameters.Add(crp(OracleType.DateTime, dtBegin, "1", false));
-                cmd.Parameters.Add(crp(OracleType.DateTime, dtEnd, "2", false));
-                cmd.ExecuteNonQuery();
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
+                    OracleCommand cmd = new OracleCommand(query, connection);
+                    cmd.Parameters.Add(crp(OracleType.DateTime, dtBegin, "1", false));
+                    cmd.Parameters.Add(crp(OracleType.DateTime, dtEnd, "2", false));
+                    cmd.ExecuteNonQuery();
+                }
             }
             catch (Exception ex) { msg = ex.Message; return -1; }
             return ret;

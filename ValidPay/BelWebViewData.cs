@@ -20,7 +20,7 @@ namespace ValidPay
 
         CBelWebData clWork;
 
-        int s_index;
+       // int s_index;
         int iRow;
 
         public BelWebViewData(CConfig cf)

@@ -27,4 +27,5 @@ d:\Project\ValidPay\ValidPay\bin\Debug\Oracle.DataAccess.dll
 d:\Project\ValidPay\ValidPay\obj\x86\Debug\ValidPay.csproj.CopyComplete
 d:\Project\ValidPay\ValidPay\obj\x86\Debug\ValidPay.exe
 d:\Project\ValidPay\ValidPay\obj\x86\Debug\ValidPay.pdb
-d:\Project\ValidPay\ValidPay\obj\x86\Debug\ValidPay.csprojAssemblyReference.cache
+D:\Project\ValidPay\ValidPay\obj\x86\Debug\ValidPay.csprojAssemblyReference.cache
+D:\Project\ValidPay\ValidPay\bin\Debug\Newtonsoft.Json.dll

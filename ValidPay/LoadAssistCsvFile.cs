@@ -292,7 +292,7 @@ namespace ValidPay
                 int i = 0;
                 int cnt = data.Count;
 
-                delete_file(data[0].filename);
+             //   delete_file(data[0].filename);
                 
                 int cntrows = 0;
 
@@ -351,41 +351,46 @@ namespace ValidPay
             try
             {
                 string query = string.Format("SELECT FILENAME FROM Rcd.VALID_ASSISTDATA_CSV GROUP BY FILENAME");
-                OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();
-
-                OracleCommand cmd = new OracleCommand(query, connection);
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
                 {
-                    while (reader.Read())
-                        ret.Add(reader.GetString(0));
-                }
+                    connection.Open();
 
-                reader.Dispose();
+                    OracleCommand cmd = new OracleCommand(query, connection);
+                    OracleDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                            ret.Add(reader.GetString(0));
+                    }
+
+                    reader.Dispose();
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             return ret;
         }
 
 
-        private void delete_file(string filename)
+        [Obsolete]
+        public int DeleteFile(string filename, out string msg)
         {
-            string query = string.Format("DELETE FROM Rcd.VALID_ASSISTDATA_CSV WHERE FILENAME=:1");
-
-            OracleConnection connection = new OracleConnection(config.connectionstring);
-            connection.Open();
-
-            OracleCommand cmd = new OracleCommand(query, connection);
-
+            int ret = 0;
+            msg = null;
             try
             {
-                cmd.Parameters.Add(crp(OracleType.Char, filename, "1", false));
+                string query = string.Format("DELETE FROM Rcd.VALID_ASSISTDATA_CSV WHERE FILENAME=:1");
 
-                cmd.ExecuteNonQuery();
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
+                    OracleCommand cmd = new OracleCommand(query, connection);
+                    cmd.Parameters.Add(crp(OracleType.Char, filename, "1", false));
+                    cmd.ExecuteNonQuery();
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { msg = ex.Message; return -1; }
+            return ret;
         }
 
         private OracleParameter crp(OracleType type, object val, string name, bool isn)
