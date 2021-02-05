@@ -62,6 +62,7 @@ namespace ValidPay
             log.DirName = config.logpath;
         }
 
+        [Obsolete]
         private void LoadRcpData_Load(object sender, EventArgs e)
         {
             try
@@ -84,29 +85,30 @@ namespace ValidPay
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); } 
         }
 
+        [Obsolete]
         private DateTime GetMaxDate()
         {
             DateTime ret = new DateTime();
 
             try
             {
-                OracleConnection connet = new OracleConnection();
-
-                connet = new OracleConnection(config.connectionstring);
-                connet.Open();
-                if (connet.State == ConnectionState.Open)
+                using (OracleConnection connect = new OracleConnection(config.connectionstring))
                 {
-                    string query = string.Format("SELECT MAX(ShiftDate) FROM Rcd.Valid_rcpdata");
-
-                    OracleCommand cmd = new OracleCommand(query, connet);
-                    OracleDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows)
+                    connect.Open();
+                    if (connect.State == ConnectionState.Open)
                     {
-                        while (reader.Read())
+                        string query = string.Format("SELECT MAX(ShiftDate) FROM Rcd.Valid_rcpdata");
+
+                        OracleCommand cmd = new OracleCommand(query, connect);
+                        OracleDataReader reader = cmd.ExecuteReader();
+
+                        if (reader.HasRows)
                         {
-                            if (!reader.IsDBNull(0))
-                                ret = reader.GetDateTime(0);
+                            while (reader.Read())
+                            {
+                                if (!reader.IsDBNull(0))
+                                    ret = reader.GetDateTime(0);
+                            }
                         }
                     }
                 }
@@ -118,7 +120,6 @@ namespace ValidPay
 
         private void init_lst()
         {
-            string msg = null;
             try
             {
                 
@@ -158,7 +159,7 @@ namespace ValidPay
                     {
                         if (!read(reader, out item, out msg))
                         {
-                            msg = "Возможно не все данные получены из БД!";
+                            msg = "Warning! Perhaps not all data is received from the database!";
                             ret = false;
                         }
                         else data.Add(item);
@@ -173,6 +174,11 @@ namespace ValidPay
 
         private void delete_data(int emtcode, OracleConnection connection)
         {
+            if (connection is null)
+            {
+                throw new ArgumentNullException(nameof(connection));
+            }
+
             string query = string.Format("DELETE FROM Rcd.VALID_RCPDATA WHERE Shiftdate>=:1 AND Shiftdate<=:2 AND EmtCodeFrm=:3");
 
             OracleCommand cmd = new OracleCommand(query, connection);
@@ -241,8 +247,14 @@ namespace ValidPay
             return ret;
         }
 
+        [Obsolete]
         private bool SetData(STRowRcpData item, out string msg, OracleConnection connection)
         {
+            if (connection is null)
+            {
+                throw new ArgumentNullException(nameof(connection));
+            }
+
             msg = null;
 
             try
@@ -269,7 +281,6 @@ namespace ValidPay
                 command.Parameters.Add(crp(OracleType.Int32, item.WTCASHTYPE, "15", false));
                 command.Parameters.Add(crp(OracleType.Char, item.DESCRIPT, "16", false));
                 command.Parameters.Add(crp(OracleType.Char, item.CARDBANK, "17", false));
-                //command.Parameters.Add(crp(OracleType.Char, item.RRN.PadLeft(12,'0'), "18", false));
                 command.Parameters.Add(crp(OracleType.Char, item.RRN, "18", false));
                 command.Parameters.Add(crp(OracleType.Number, item.S_DIIS, "19", false));
                 command.Parameters.Add(crp(OracleType.Char, item.NAMEPRODUCT, "20", false));
@@ -280,89 +291,98 @@ namespace ValidPay
             return true;
         }
 
-        
-
+        [Obsolete]
         private void StartProc(object sender, DoWorkEventArgs e)
         {
-            OracleConnection connection = new OracleConnection(config.connectionstring);
-            string msg = null;
-            List<STEmitent> lst_emt = new List<STEmitent>();
-            List<STRowRcpData> data;
-            try
+            using (OracleConnection connection = new OracleConnection(config.connectionstring))
             {
-                connection.Open();
-
-                dtBegin = new DateTime(dateTimePickerDTB.Value.Year, dateTimePickerDTB.Value.Month, dateTimePickerDTB.Value.Day, 0, 0, 0, 0);
-                dtEnd = new DateTime(dateTimePickerDTE.Value.Year, dateTimePickerDTE.Value.Month, dateTimePickerDTE.Value.Day, 23, 59, 59, 0);
-
-                for (int i = 0; i <= (checkedListBoxEmt.Items.Count - 1); i++)
+                string msg = null;
+                List<STEmitent> lst_emt = new List<STEmitent>();
+                List<STRowRcpData> data;
+                int cnt_r, cnt_b;
+                try
                 {
-                    if (checkedListBoxEmt.GetItemChecked(i))
+                    connection.Open();
+
+                    dtBegin = new DateTime(dateTimePickerDTB.Value.Year, dateTimePickerDTB.Value.Month, dateTimePickerDTB.Value.Day, 0, 0, 0, 0);
+                    dtEnd = new DateTime(dateTimePickerDTE.Value.Year, dateTimePickerDTE.Value.Month, dateTimePickerDTE.Value.Day, 23, 59, 59, 0);
+
+                    for (int i = 0; i <= (checkedListBoxEmt.Items.Count - 1); i++)
                     {
-                        string emtname = checkedListBoxEmt.Items[i].ToString();
-                        STEmitent st = get_emt(emtname);
-                        if (st.code > 0) lst_emt.Add(st);
-                    }
-                }
-
-
-                if (lst_emt.Count > 0)
-                {
-                    foreach (STEmitent emt in lst_emt)
-                    {
-                        emtname = emt.name;
-
-                        if (backgroundWorker1.CancellationPending)
+                        if (checkedListBoxEmt.GetItemChecked(i))
                         {
-                            e.Cancel = true;
-                            backgroundWorker1.ReportProgress(0);
-                            return;
+                            string emtname = checkedListBoxEmt.Items[i].ToString();
+                            STEmitent st = get_emt(emtname);
+                            if (st.code > 0) lst_emt.Add(st);
                         }
+                    }
 
-                        backgroundWorker1.ReportProgress(0);
 
-                        data = new List<STRowRcpData>();
-                        if(!GetData(emt.c_string, out data, out msg)) { log.LogLine(msg); continue;}
+                    if (lst_emt.Count > 0)
+                    {
+                        log.LogLine(string.Format("-------------------------", emtname));
+                        log.LogLine(string.Format("Timespan: {0}-{1} ", dtBegin.ToString("dd-MM-yyyy"), dtEnd.ToString("dd-MM-yyyy")));
+                        log.LogLine(string.Format("-------------------------", emtname));
 
-                        log.LogLine(string.Format("{0}: {1} rows prepare to writing", emtname, data.Count));
-
-                        if (data.Count > 0)
+                        foreach (STEmitent emt in lst_emt)
                         {
-                            // удаляем период
-                            delete_data(emt.code, connection);
+                            emtname = emt.name;
+                            log.LogLine(string.Format("{0} start processing...", emtname));
 
-                            int cnt = data.Count;
-                            int pc = 0;
-                            int i = 0;
-
-                            foreach (STRowRcpData item in data)
+                            if (backgroundWorker1.CancellationPending)
                             {
-                                if (backgroundWorker1.CancellationPending)
-                                {
-                                    //  transaction.Rollback();
-                                    e.Cancel = true;
-                                    backgroundWorker1.ReportProgress(0);
-                                    return;
-                                }
-
-                                if (!SetData(item, out msg, connection)) log.LogLine(msg);
-
-                                i += 1;
-                                //        pc = i / cnt * 100;
-                                double d = ((i * 1.0) / cnt) * 100;
-                                //      double f = Math.Round((double)(i / cnt * 100.0));
-                                backgroundWorker1.ReportProgress((int)d);
+                                e.Cancel = true;
+                                backgroundWorker1.ReportProgress(0);
+                                return;
                             }
+
+                            backgroundWorker1.ReportProgress(0);
+
+                            data = new List<STRowRcpData>();
+                            if (!GetData(emt.c_string, out data, out msg)) { log.LogLine(msg); continue; }
+
+                            log.LogLine(string.Format("{0} rows prepare to writing", data.Count));
+
+                            cnt_r = 0;
+                            cnt_b = 0;
+
+                            if (data.Count > 0)
+                            {
+                                // удаляем период
+                                delete_data(emt.code, connection);
+
+                                int cnt = data.Count;
+                                int pc = 0;
+                                int i = 0;
+
+                                foreach (STRowRcpData item in data)
+                                {
+                                    if (backgroundWorker1.CancellationPending)
+                                    {
+                                        e.Cancel = true;
+                                        backgroundWorker1.ReportProgress(0);
+                                        return;
+                                    }
+
+                                    if (!SetData(item, out msg, connection)) { cnt_b++; log.LogLine(msg); }
+                                    else cnt_r++;
+
+                                    i += 1;
+                                    double d = ((i * 1.0) / cnt) * 100;
+                                    backgroundWorker1.ReportProgress((int)d);
+                                }
+                            }
+
+                            log.LogLine(string.Format("{0}/{1} rows added/missed", cnt_r, cnt_b));
+                            log.LogLine(string.Format("{0} end processing...", emtname));
                         }
-                        //if (!SetData(data, sender, e, out msg, emt) ) { log.LogLine(msg); continue; }
-
                     }
+
+
+                    connection.Close();
                 }
-
-
-                connection.Close();
+                catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
-            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private STEmitent get_emt(string emtname)
@@ -434,7 +454,7 @@ namespace ValidPay
         {
             if (e.Cancelled)
             {
-                labelInfo.Text = "Запись файла прервана пользователем...";
+                labelInfo.Text = "File recording interrupted by user...";
             }
 
          // Check to see if an error occurred in the background process.
@@ -446,7 +466,7 @@ namespace ValidPay
             else
             {
                 // Everything completed normally.
-                labelInfo.Text = "Запись файла завершена...";
+                labelInfo.Text = "File recording completed...";
             }
 
             buttonCancel.Enabled = false;

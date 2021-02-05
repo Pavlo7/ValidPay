@@ -35,7 +35,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dateTimePickerDTE = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePickerDTB = new System.Windows.Forms.DateTimePicker();
             this.checkedListBoxEmt = new System.Windows.Forms.CheckedListBox();
@@ -62,7 +61,7 @@
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 10;
-            this.buttonExit.Text = "Отмена";
+            this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
@@ -72,7 +71,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 9;
-            this.buttonOK.Text = "Загрузить";
+            this.buttonOK.Text = "Load";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -83,7 +82,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 8;
-            this.buttonCancel.Text = "Остановить";
+            this.buttonCancel.Text = "Break";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -94,72 +93,62 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(444, 331);
+            this.groupBox1.Size = new System.Drawing.Size(444, 330);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Параметры загрузки";
+            this.groupBox1.Text = "Options";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dateTimePickerDTE);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.dateTimePickerDTB);
-            this.groupBox2.Location = new System.Drawing.Point(18, 19);
+            this.groupBox2.Location = new System.Drawing.Point(18, 18);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(405, 63);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Период";
+            this.groupBox2.Text = "Timespan";
             // 
             // dateTimePickerDTE
             // 
-            this.dateTimePickerDTE.Location = new System.Drawing.Point(228, 28);
+            this.dateTimePickerDTE.Location = new System.Drawing.Point(232, 28);
             this.dateTimePickerDTE.Name = "dateTimePickerDTE";
-            this.dateTimePickerDTE.Size = new System.Drawing.Size(158, 20);
+            this.dateTimePickerDTE.Size = new System.Drawing.Size(157, 20);
             this.dateTimePickerDTE.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "с";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(209, 30);
+            this.label3.Location = new System.Drawing.Point(202, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(19, 13);
+            this.label3.Size = new System.Drawing.Size(10, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "по";
+            this.label3.Text = "-";
             // 
             // dateTimePickerDTB
             // 
             this.dateTimePickerDTB.Location = new System.Drawing.Point(27, 28);
             this.dateTimePickerDTB.Name = "dateTimePickerDTB";
-            this.dateTimePickerDTB.Size = new System.Drawing.Size(158, 20);
+            this.dateTimePickerDTB.Size = new System.Drawing.Size(157, 20);
             this.dateTimePickerDTB.TabIndex = 3;
             // 
             // checkedListBoxEmt
             // 
             this.checkedListBoxEmt.FormattingEnabled = true;
-            this.checkedListBoxEmt.Location = new System.Drawing.Point(18, 117);
+            this.checkedListBoxEmt.Location = new System.Drawing.Point(18, 101);
             this.checkedListBoxEmt.Name = "checkedListBoxEmt";
-            this.checkedListBoxEmt.Size = new System.Drawing.Size(405, 199);
+            this.checkedListBoxEmt.Size = new System.Drawing.Size(405, 214);
             this.checkedListBoxEmt.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 101);
+            this.label4.Location = new System.Drawing.Point(15, 86);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Эмитенты";
+            this.label4.Text = "Owner";
             // 
             // labelInfo
             // 
@@ -182,7 +171,7 @@
             // 
             this.labelEmtCode.AutoSize = true;
             this.labelEmtCode.ForeColor = System.Drawing.Color.Blue;
-            this.labelEmtCode.Location = new System.Drawing.Point(9, 347);
+            this.labelEmtCode.Location = new System.Drawing.Point(9, 348);
             this.labelEmtCode.Name = "labelEmtCode";
             this.labelEmtCode.Size = new System.Drawing.Size(16, 13);
             this.labelEmtCode.TabIndex = 13;
@@ -200,12 +189,13 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.progressBarData);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoadRcpData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Загрузить данные РЦП";
+            this.Text = "Load RCP Data";
             this.Load += new System.EventHandler(this.LoadRcpData_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -228,7 +218,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerDTE;
         private System.Windows.Forms.DateTimePicker dateTimePickerDTB;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelInfo;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;

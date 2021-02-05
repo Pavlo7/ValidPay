@@ -42,7 +42,7 @@
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 34;
-            this.buttonExit.Text = "Отмена";
+            this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
@@ -52,7 +52,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 33;
-            this.buttonOK.Text = "Загрузить";
+            this.buttonOK.Text = "Load";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -89,7 +89,7 @@
             this.MinimizeBox = false;
             this.Name = "LoadAmout300";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Загрузить суммы реализации из ПЦ (Drive&Pay)";
+            this.Text = "Load sale data from PC (Drive&Pay)";
             this.Load += new System.EventHandler(this.LoadAmout300_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -13,7 +13,9 @@ namespace ValidPay
     {
         public DateTime dtbegin;
         public DateTime dtend;
-        public int type;            // 1 - дубликаты, 2 - несовпадения сумм
+        public int orientation;            // 1 - rpc, 2 - mobile app
+        public int app_code;
+        public bool b;
     }
 
      /* Эмитент */
@@ -48,9 +50,9 @@ namespace ValidPay
             List<STValidData> list_data = new List<STValidData>();
             try
             {
-                if (viewparam.type == 2) list_data = GetData1(viewparam);
-                if (viewparam.type == 1) list_data = GetData2(viewparam);
-                if (viewparam.type == 3) list_data = GetData3(viewparam);
+              //  if (viewparam.type == 2) list_data = GetData1(viewparam);
+              //  if (viewparam.type == 1) list_data = GetData2(viewparam);
+              //  if (viewparam.type == 3) list_data = GetData3(viewparam);
             }
             catch (Exception ex) { log.LogLine(ex.Message); }
             return list_data;
@@ -291,9 +293,149 @@ namespace ValidPay
 
             return list_data;
         }
-         
 
-         private OracleParameter crp(OracleType type, object val, string name, bool isn)
+        [Obsolete]
+        public int GetTable(STValidDataParam param, out DataTable table, out string msg)
+        {
+            int ret = 0;
+            table = new DataTable();
+            msg = null;
+            string query = null;
+            try
+            {
+                // if we don't get query - return 
+                if (get_query(param.orientation, param.app_code, param.b, out query, out msg) != 0) { return 1; }
+
+                using (OracleConnection connect = new OracleConnection(config.connectionstring))
+                {
+                    connect.Open();
+
+                    if (connect.State != ConnectionState.Open) { msg = "no connection to DB"; return 2; }
+                    using (OracleCommand cmd = new OracleCommand(query, connect))
+                    {
+                        cmd.Parameters.Add(crp(OracleType.DateTime, param.dtbegin, "1", false));
+                        cmd.Parameters.Add(crp(OracleType.DateTime, param.dtend, "2", false));
+                        cmd.CommandTimeout = 250;
+                        OracleDataReader reader = cmd.ExecuteReader();
+                        OracleDataAdapter da = new OracleDataAdapter(cmd);
+                        da.Fill(table);
+                    }
+
+                }
+
+            }
+            catch (Exception ex) { log.LogLine(ex.Message); msg = ex.Message; return -1; }
+            return ret;
+        }
+
+        private int get_query(int orientation, int app_code , bool b, out string query, out string msg)
+        {
+            // :1 and :2 - all queries have mandatory parameters date begin and date end
+
+            query = null;
+            msg = null;
+            int ret = 0;
+            try
+            {
+                // Valid Rcp to Assist all trans
+                string query1 = "select Rrn, EmtCodeFrm, AzsCode, DocNumber, DocDate, S_DIIS AS Amount_RCP, SUMM1 AS Amount_Assist, Comments FROM " +
+                                " (select T1.RRN, T1.EMTCODEFRM, T1.AZSCODE, T1.DOCNUMBER, T1.DOCDATE, T1.S_DIIS, case when T2.AMOUNT>0 then ROUND(T2.AMOUNT,2) else 0 end AS SUMM1," +
+                                " case when T2.AMOUNT is null then 'RRN not found in Assist' else null end AS Comments " +
+                                "FROM ( SELECT RRN, EMTCODEFRM, AZSCODE, DOCNUMBER, DOCDATE, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO=300 AND SHIFTDATE>=:1 " +
+                                "AND SHIFTDATE<:2 GROUP BY RRN, EMTCODEFRM, AZSCODE, DOCNUMBER,  DOCDATE ) T1 LEFT JOIN " +
+                                "( select OrderNumber, sum(Amount) AS AMOUNT from Rcd.VALID_ASSISTDATA_CSV  group by OrderNumber) T2 ON T1.RRN=T2.OrderNumber)  order by Docdate";
+
+                string query2 = "select Rrn, EmtCodeFrm, AzsCode, DocNumber, DocDate, S_DIIS AS Amount_RCP, SUMM1 AS Amount_Assist, Comments FROM " +
+                                "(select T1.RRN, T1.EMTCODEFRM, T1.AZSCODE, T1.DOCNUMBER, T1.DOCDATE, T1.S_DIIS, case when T2.AMOUNT>0 then ROUND(T2.AMOUNT,2) else 0 end AS SUMM1," +
+                                " case when T2.AMOUNT is null then 'RRN not found in Assist' else null end AS Comments " +
+                                "FROM ( SELECT RRN, EMTCODEFRM, AZSCODE, DOCNUMBER, DOCDATE, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO=300 AND SHIFTDATE>=:1 AND SHIFTDATE<:2 " +
+                                "GROUP BY RRN, EMTCODEFRM, AZSCODE, DOCNUMBER,  DOCDATE ) T1 LEFT JOIN ( select OrderNumber, sum(Amount) AS AMOUNT from Rcd.VALID_ASSISTDATA_CSV  group by OrderNumber) " +
+                                "T2 ON T1.RRN=T2.OrderNumber) WHERE S_DIIS<>SUMM1  order by Docdate";
+
+                string query3 = "select Rrn, EmtCodeFrm, AzsCode, DocNumber, DocDate, S_DIIS AS Amount_RCP, SUMM1 AS Amount_BGPBMobile, Comments FROM (select T1.RRN, T1.EMTCODEFRM, T1.AZSCODE," +
+                   " T1.DOCNUMBER, T1.DOCDATE, T1.S_DIIS, case when T2.AMOUNT > 0 then ROUND(T2.AMOUNT, 2) else 0 end AS SUMM1, case when T2.AMOUNT is null then 'RRN not found in BGPBMobile' " +
+                   "else null end AS Comments FROM (SELECT RRN, EMTCODEFRM, AZSCODE, DOCNUMBER, DOCDATE, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA WHERE EMTCODETO= 305 " +
+                   "AND SHIFTDATE>=:1 AND SHIFTDATE<:2 GROUP BY RRN, EMTCODEFRM, AZSCODE, DOCNUMBER,  DOCDATE ) T1 LEFT JOIN (select Rrn, sum(Amount) AS AMOUNT " +
+                   "from Rcd.VALID_BGPBMobileData  group by RRN) T2 ON T1.RRN = T2.RRN) order by Docdate";
+
+                string query4 = "select Rrn, EmtCodeFrm, AzsCode, DocNumber, DocDate, S_DIIS AS Amount_RCP, SUMM1 AS Amount_BGPBMobile, Comments FROM (select T1.RRN, T1.EMTCODEFRM, T1.AZSCODE," +
+                    " T1.DOCNUMBER, T1.DOCDATE, T1.S_DIIS, case when T2.AMOUNT > 0 then ROUND(T2.AMOUNT, 2) else 0 end AS SUMM1, case when T2.AMOUNT is null then 'RRN not found in BGPBMobile' " +
+                    "else null end AS Comments FROM (SELECT RRN, EMTCODEFRM, AZSCODE, DOCNUMBER, DOCDATE, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA WHERE EMTCODETO= 305 " +
+                    "AND SHIFTDATE>=:1 AND SHIFTDATE<:2 GROUP BY RRN, EMTCODEFRM, AZSCODE, DOCNUMBER,  DOCDATE ) T1 LEFT JOIN (select Rrn, sum(Amount) AS AMOUNT " +
+                    "from Rcd.VALID_BGPBMobileData  group by RRN) T2 ON T1.RRN = T2.RRN) WHERE S_DIIS<>SUMM1 order by Docdate";
+
+                string query5 = "select Rrn, EmtCodeFrm, AzsCode, DocNumber, DocDate, S_DIIS AS Amount_RCP, SUMM1 AS Amount_BelWeb, Comments FROM (select T1.RRN, T1.EMTCODEFRM, T1.AZSCODE," +
+                  " T1.DOCNUMBER, T1.DOCDATE, T1.S_DIIS, case when T2.AMOUNT > 0 then ROUND(T2.AMOUNT, 2) else 0 end AS SUMM1, case when T2.AMOUNT is null then 'RRN not found in BelWeb' " +
+                  "else null end AS Comments FROM (SELECT RRN, EMTCODEFRM, AZSCODE, DOCNUMBER, DOCDATE, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA WHERE EMTCODETO= 306 " +
+                  "AND SHIFTDATE>=:1 AND SHIFTDATE<:2 GROUP BY RRN, EMTCODEFRM, AZSCODE, DOCNUMBER,  DOCDATE ) T1 LEFT JOIN (select Rrn, sum(Amount) AS AMOUNT from Rcd.VALID_BelWEBDATA  group by RRN)" +
+                  " T2 ON T1.RRN = T2.RRN) order by Docdate";
+
+                string query6 = "select Rrn, EmtCodeFrm, AzsCode, DocNumber, DocDate, S_DIIS AS Amount_RCP, SUMM1 AS Amount_BelWeb, Comments FROM (select T1.RRN, T1.EMTCODEFRM, T1.AZSCODE," +
+                    " T1.DOCNUMBER, T1.DOCDATE, T1.S_DIIS, case when T2.AMOUNT > 0 then ROUND(T2.AMOUNT, 2) else 0 end AS SUMM1, case when T2.AMOUNT is null then 'RRN not found in BelWeb' " +
+                    "else null end AS Comments FROM (SELECT RRN, EMTCODEFRM, AZSCODE, DOCNUMBER, DOCDATE, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA WHERE EMTCODETO= 306 " +
+                    "AND SHIFTDATE>=:1 AND SHIFTDATE<:2 GROUP BY RRN, EMTCODEFRM, AZSCODE, DOCNUMBER,  DOCDATE ) T1 LEFT JOIN (select Rrn, sum(Amount) AS AMOUNT from Rcd.VALID_BelWEBDATA  group by RRN)" +
+                    " T2 ON T1.RRN = T2.RRN) WHERE S_DIIS<>SUMM1 order by Docdate";
+
+                string query7 = "select T2.OrderNumber, T2.AMOUNT, T1.S_DIIS FROM (select OrderNumber, sum(Amount) AS AMOUNT from Rcd.VALID_ASSISTDATA_CSV where SHIFTDATA >= :1 " +
+                    " AND SHIFTDATA <=:2)  group by OrderNumber) T2 LEFT JOIN (select RRN, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO = 300 GROUP BY RRN) T1" +
+                    " ON T2.OrderNumber = T1.RRN   ";
+
+                string query8 = "select T2.OrderNumber, T2.AMOUNT, T1.S_DIIS FROM (select OrderNumber, sum(Amount) AS AMOUNT from Rcd.VALID_ASSISTDATA_CSV where SHIFTDATA >= :1 " +
+                    " AND SHIFTDATA <=:2)  group by OrderNumber) T2 LEFT JOIN (select RRN, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO = 300 GROUP BY RRN) T1" +
+                    " ON T2.OrderNumber = T1.RRN where T2.AMOUNT<> T1.S_DIIS  ";
+
+                string query9 = "select T2.RRN, T2.AMOUNT, T1.S_DIIS FROM (select RRN, sum(Amount) AS AMOUNT from Rcd.VALID_BGPBMobileData where SHIFTDATE >= :1 " +
+                    " AND SHIFTDATE <=:2)  group by RRN) T2 LEFT JOIN (select RRN, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO = 305 GROUP BY RRN) T1" +
+                    " ON T2.RRN = T1.RRN";
+
+                string query10 = "select T2.RRN, T2.AMOUNT, T1.S_DIIS FROM (select RRN, sum(Amount) AS AMOUNT from Rcd.VALID_BGPBMobileData where SHIFTDATE >= :1 " +
+                    " AND SHIFTDATE <=:2)  group by RRN) T2 LEFT JOIN (select RRN, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO = 305 GROUP BY RRN) T1" +
+                    " ON T2.RRN = T1.RRN where T2.AMOUNT<> T1.S_DIIS ";
+
+                string query11 = "select T2.RRN, T2.AMOUNT, T1.S_DIIS FROM (select RRN, sum(Amount) AS AMOUNT from Rcd.Valid_BelWEBDATA where SHIFTDATE >= :1 " +
+                    " AND SHIFTDATE <=:2)  group by RRN) T2 LEFT JOIN (select RRN, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO = 306 GROUP BY RRN) T1" +
+                    " ON T2.RRN = T1.RRN";
+
+                string query12 = "select T2.RRN, T2.AMOUNT, T1.S_DIIS FROM (select RRN, sum(Amount) AS AMOUNT from Rcd.Valid_BelWEBDATA where SHIFTDATE >= :1 " +
+                    " AND SHIFTDATE <=:2)  group by RRN) T2 LEFT JOIN (select RRN, sum(S_DIIS) AS S_DIIS FROM Rcd.VALID_RCPDATA  WHERE EMTCODETO = 306 GROUP BY RRN) T1" +
+                    " ON T2.RRN = T1.RRN where T2.AMOUNT<> T1.S_DIIS";
+
+                switch (orientation)
+                {
+                    case 1:
+                        {
+                            switch (app_code)
+                            {
+                                case 300: { if (b) query = query2; else query = query1; } break;
+                                case 305: { if (b) query = query4; else query = query3; } break;
+                                case 306: { if (b) query = query6; else query = query5; } break;
+                                default: msg = string.Format("Unknown app_code: {0}", orientation); return 2;
+                            }
+                        
+                        }
+                        break;
+                    case 2:
+                        {
+                            switch (app_code)
+                            {
+                                case 300: { if (b) query = query8; else query = query7; } break;
+                                case 305: { if (b) query = query10; else query = query9; } break;
+                                case 306: { if (b) query = query12; else query = query11; } break;
+                                default: msg = string.Format("Unknown app_code: {0}", orientation); return 2;
+                            }
+                        }
+                        break;
+                    default: msg = string.Format("Unknown orientation code: {0}", orientation); return 1;
+                }
+            
+            }
+            catch (Exception ex) { log.LogLine(ex.Message); msg = ex.Message; return -1; }
+            return ret;
+        }
+
+
+
+        private OracleParameter crp(OracleType type, object val, string name, bool isn)
         {
             OracleParameter param = new OracleParameter();
             param.ParameterName = name;

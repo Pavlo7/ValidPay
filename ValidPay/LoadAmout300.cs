@@ -53,6 +53,7 @@ namespace ValidPay
             this.Close();
         }
 
+        [Obsolete]
         private void buttonOK_Click(object sender, EventArgs e)
         {
             string msg;
@@ -68,7 +69,7 @@ namespace ValidPay
                 }
             }
 
-            MessageBox.Show("Процесс записи файла завершен.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Recording process completed!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonChangeDir_Click(object sender, EventArgs e)
@@ -81,70 +82,6 @@ namespace ValidPay
                 //buttonOK.Enabled = true;
             }
         }
-
-       /* private bool read_file(string FileName, out string msg)
-        {
-            msg = null;
-
-            Excel._Application app = new Excel.Application();
-
-            try
-            {
-                string FilePath = Path.Combine(inpath, FileName);
-
-                Excel._Workbook book = app.Workbooks.Open(FilePath, Missing.Value, Missing.Value,
-                       Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
-                       Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
-                       Missing.Value, Missing.Value);
-                Excel.Sheets sheets = book.Worksheets;
-                Excel._Worksheet sheet;
-
-                sheet = (Excel._Worksheet)sheets.get_Item(1);
-
-                Excel.Range range;
-
-                data = new List<STRowAmountPC>();
-                STRowAmountPC item = new STRowAmountPC();
-
-                int lastRow = sheet.UsedRange.Rows.Count;
-                object o;
-                string gdt;
-                string stramount;
-
-                for (int i = 1; i <= lastRow; i++)
-                {
-                    gdt = null; stramount = null;
-
-                    range = sheet.get_Range(string.Format("A{0}", i), Missing.Value);
-                    if (range.Value2 != null)
-                    {
-                        object f = range.Value2;
-                        DateTime dt = Convert.ToDateTime(range.Value2).Trim();
-                    }
-
-                    range = sheet.get_Range(string.Format("B{0}", i), Missing.Value);
-                    if (range.Value2 != null)
-                    {
-                        stramount = Convert.ToString(range.Value2).Trim();
-                    }
-
-                    if (create_row(gdt, stramount, out item, out msg)) data.Add(item);
-                    else log.LogLine(string.Format("Ошибка чтения в строке {0}, {1})", i, msg));
-
-                }
-
-                app.Quit();
-            }
-            catch (Exception ex)
-            {
-                msg = ex.Message;
-                log.LogLine("File wasn't read.");
-                return false;
-            }
-            finally { app.Quit(); }
-
-            return true;
-        }*/
 
         private bool read_file(string FileName, out string msg)
         {
@@ -168,7 +105,7 @@ namespace ValidPay
                     string[] words = arr_lines[i].Split(';');
 
                     if (create_row(words[0], words[1], out item, out msg)) data.Add(item);
-                    else log.LogLine(string.Format("Ошибка чтения в строке {0}, {1})", i, msg));
+                    else log.LogLine(string.Format("Erorr row's reading {0}, {1})", i, msg));
                 }
             }
             catch (Exception ex)
@@ -196,61 +133,69 @@ namespace ValidPay
             return ret;
         }
 
-
+        [Obsolete]
         private void insert_row(STRowAmountPC item)
         {
             try
             {
-                OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();   
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
 
-                string query = "INSERT INTO RCD.VALID_AMOUNT_PC ( PDATE, APPCODE, AMOUNT) values (:1, :2, :3)";
-                OracleCommand command = new OracleCommand(query, connection);
-                command.Parameters.Add(crp(OracleType.DateTime, item.dtime, "1", false));
-                command.Parameters.Add(crp(OracleType.Int32, item.appcode, "2", false));
-                command.Parameters.Add(crp(OracleType.Number, Math.Round(item.amount, 2), "3", false));
-                command.ExecuteNonQuery();
-                connection.Close();
+                    string query = "INSERT INTO RCD.VALID_AMOUNT_PC ( PDATE, APPCODE, AMOUNT) values (:1, :2, :3)";
+                    OracleCommand command = new OracleCommand(query, connection);
+                    command.Parameters.Add(crp(OracleType.DateTime, item.dtime, "1", false));
+                    command.Parameters.Add(crp(OracleType.Int32, item.appcode, "2", false));
+                    command.Parameters.Add(crp(OracleType.Number, Math.Round(item.amount, 2), "3", false));
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
+        [Obsolete]
         private void update_row(STRowAmountPC item)    
         {
             try
             {
-                OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
 
-                string query = "UPDATE RCD.VALID_AMOUNT_PC SET AMOUNT=:3 WHERE PDATE=:1 and APPCODE=:2";
-                OracleCommand command = new OracleCommand(query, connection);
-                command.Parameters.Add(crp(OracleType.DateTime, item.dtime, "1", false));
-                command.Parameters.Add(crp(OracleType.Int32, item.appcode, "2", false));
-                command.Parameters.Add(crp(OracleType.Number, Math.Round(item.amount, 2), "3", false));
-                command.ExecuteNonQuery();
-                connection.Close();
+                    string query = "UPDATE RCD.VALID_AMOUNT_PC SET AMOUNT=:3 WHERE PDATE=:1 and APPCODE=:2";
+                    OracleCommand command = new OracleCommand(query, connection);
+                    command.Parameters.Add(crp(OracleType.DateTime, item.dtime, "1", false));
+                    command.Parameters.Add(crp(OracleType.Int32, item.appcode, "2", false));
+                    command.Parameters.Add(crp(OracleType.Number, Math.Round(item.amount, 2), "3", false));
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
+        [Obsolete]
         private bool is_row(DateTime dt, int code)
         {
             bool ret = false;
             try
             {
-                OracleConnection connection = new OracleConnection(config.connectionstring);
-                connection.Open();
+                using (OracleConnection connection = new OracleConnection(config.connectionstring))
+                {
+                    connection.Open();
 
-                string query = "SELECT * FROM RCD.VALID_AMOUNT_PC WHERE PDATE=:1 and APPCODE=:2";
-                OracleCommand command = new OracleCommand(query, connection);
-                command.Parameters.Add(crp(OracleType.DateTime, dt, "1", false));
-                command.Parameters.Add(crp(OracleType.Int32, code, "2", false));
-                OracleDataReader reader = command.ExecuteReader();
-                if (reader.HasRows) ret = true;
-                reader.Close();
-                connection.Close();
+                    string query = "SELECT * FROM RCD.VALID_AMOUNT_PC WHERE PDATE=:1 and APPCODE=:2";
+                    OracleCommand command = new OracleCommand(query, connection);
+                    command.Parameters.Add(crp(OracleType.DateTime, dt, "1", false));
+                    command.Parameters.Add(crp(OracleType.Int32, code, "2", false));
+                    OracleDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows) ret = true;
+                    reader.Close();
+                    connection.Close();
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             return ret;
         }
 
@@ -275,7 +220,7 @@ namespace ValidPay
 
             try
             {
-                if (ltime.Length < 10) { msg = "Неверный формат поля даты"; return false;}
+                if (ltime.Length < 10) { msg = "Invalid date field format!"; return false;}
                 string dt = ltime.Substring(0, 10);
                 if (DateTime.TryParse(dt, out ret)) return true;
             }

@@ -42,7 +42,7 @@ namespace ValidPay
                 
 
             }
-            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
               
 
@@ -73,7 +73,7 @@ namespace ValidPay
                 if (process.ShowDialog() == DialogResult.Cancel)
                 {
                     splitContainer1.Panel1.Enabled = true;
-                    toolStripStatusLabelTime.Text = "Отмена";
+                    toolStripStatusLabelTime.Text = "canceled";
                 }
                 else
                 {
@@ -231,9 +231,9 @@ namespace ValidPay
                 if (iRow > 0)
                 {
                     int index = dataGridViewBT.CurrentCell.RowIndex;
-                    toolStripStatusLabelRow.Text = string.Format("cтрока {0} из {1}", index + 1, iRow);
+                    toolStripStatusLabelRow.Text = string.Format("row {0} from {1}", index + 1, iRow);
                 }
-                else toolStripStatusLabelRow.Text = string.Format("нет данных");
+                else toolStripStatusLabelRow.Text = string.Format("no data");
 
                 statusStrip1.Refresh();
             }
@@ -267,20 +267,7 @@ namespace ValidPay
             {
 
                 splitContainer1.Panel1.Enabled = true;
-                //        dataGridViewBER.AutoResizeColumns();
-
-                // выделяем нужную строку
-               // foreach (DataGridViewRow row in dataGridViewBT.Rows)
-               // {
-
-                //    string rc = row.Cells["TID"].Value.ToString();
-                //    if (row.Cells["TID"].Value.ToString().Equals(curTid))
-                //    {
-                //        rowIndex = row.Index;
-                //        break;
-                //    }
-               // }
-
+            
                 if (rowIndex >= 0)
                 {
                     dataGridViewBT.Rows[rowIndex].Selected = true;
@@ -341,7 +328,7 @@ namespace ValidPay
 
         private void CreateMainTampl()
         {
-            string[] hn = new string[] { "Имя файла", "Сумма платежа", "Сумма комиссии" };
+            string[] hn = new string[] { "File", "Amount", "Comission" };
             string[] cn = new string[] { "FileName", "Amount", "Comission" };
             int[] sz = new int[] { 120, 100, 100};
             string[] frm = new string[] { "@", "f2", "f2" };
@@ -353,7 +340,7 @@ namespace ValidPay
 
         private void CreateAssistMainTampl()
         {
-            string[] hn = new string[] { "Дата","Имя файла", "Сумма платежа", "Сумма комиссии", "Платежи", "Итого" };
+            string[] hn = new string[] { "Date","File", "Amount", "Comission", "Payment", "Total" };
             string[] cn = new string[] { "FileDate","FileName", "Amount", "Comission","Payment","Neg" };
             int[] sz = new int[] { 110, 120, 100, 100, 100, 100 };
             string[] frm = new string[] { "yyyy.MM.dd", "@", "f2", "f2", "f2", "f2" };
@@ -365,7 +352,7 @@ namespace ValidPay
 
         private void CreateRCPMainTampl()
         {
-            string[] hn = new string[] { "Дата", "Сумма реализации в РЦП", "Сумма реализации в ПЦ", "Разность" };
+            string[] hn = new string[] { "Date", "Amount RCP", "Amount PC", "Total" };
             string[] cn = new string[] { "DD", "AmountRCP", "AmountPC", "Diff" };
             int[] sz = new int[] { 120, 100, 100, 100 };
             string[] frm = new string[] { "dd.MM.yyyy", "f2", "f2", "f2" };

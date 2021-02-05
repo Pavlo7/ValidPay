@@ -89,9 +89,9 @@
             this.checkBoxMove.AutoSize = true;
             this.checkBoxMove.Location = new System.Drawing.Point(12, 462);
             this.checkBoxMove.Name = "checkBoxMove";
-            this.checkBoxMove.Size = new System.Drawing.Size(168, 17);
+            this.checkBoxMove.Size = new System.Drawing.Size(123, 17);
             this.checkBoxMove.TabIndex = 33;
-            this.checkBoxMove.Text = "перемещать файлы в архив";
+            this.checkBoxMove.Text = "move files to archive";
             this.checkBoxMove.UseVisualStyleBackColor = true;
             // 
             // checkBoxReload
@@ -99,9 +99,9 @@
             this.checkBoxReload.AutoSize = true;
             this.checkBoxReload.Location = new System.Drawing.Point(12, 439);
             this.checkBoxReload.Name = "checkBoxReload";
-            this.checkBoxReload.Size = new System.Drawing.Size(148, 17);
+            this.checkBoxReload.Size = new System.Drawing.Size(90, 17);
             this.checkBoxReload.TabIndex = 32;
-            this.checkBoxReload.Text = "перезаписывать файлы";
+            this.checkBoxReload.Text = "overwrite files";
             this.checkBoxReload.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -119,7 +119,7 @@
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 37;
-            this.buttonExit.Text = "Выход";
+            this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
@@ -137,7 +137,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 35;
-            this.buttonOK.Text = "Загрузить";
+            this.buttonOK.Text = "Load";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -148,7 +148,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 34;
-            this.buttonCancel.Text = "Остановить";
+            this.buttonCancel.Text = "Break";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -182,9 +182,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 13);
+            this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 39;
-            this.label1.Text = "Выбрать приложение";
+            this.label1.Text = "Select application";
             // 
             // comboBoxApp
             // 
@@ -217,7 +217,7 @@
             this.MaximizeBox = false;
             this.Name = "LoadMobileAppData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Загрузка реестров мобильных приложений";
+            this.Text = "Load AppMobile Data";
             this.Load += new System.EventHandler(this.LoadMobileAppData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

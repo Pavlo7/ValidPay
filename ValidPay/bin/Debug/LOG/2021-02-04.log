@@ -1,0 +1,13 @@
+﻿09:34:35 Свойство ConnectionString не инициализировано.
+09:34:38 Свойство ConnectionString не инициализировано.
+09:35:28 Свойство ConnectionString не инициализировано.
+09:48:50 ORA-00923: FROM keyword not found where expected
+
+10:06:16 Свойство CommandText не инициализировано.
+10:15:52 Свойство CommandText не инициализировано.
+10:21:31 Свойство CommandText не инициализировано.
+14:10:35 Свойство CommandText не инициализировано.
+14:11:37 Свойство CommandText не инициализировано.
+14:11:39 Свойство CommandText не инициализировано.
+14:33:10 ORA-00933: SQL command not properly ended
+

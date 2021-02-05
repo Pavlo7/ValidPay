@@ -25,10 +25,10 @@ namespace ValidPay
             {
                 this.Text = string.Format("ValidPay.exe v{0}.{1}", Assembly.GetExecutingAssembly().GetName().Version.Major.ToString(), Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString());
                 config = new CConfig();
-                if (config.bTC) toolStripStatusLabel1.Text = "Соединение с БД установлено";
-                else toolStripStatusLabel1.Text = "Соединение с БД отсутствует";
+                if (config.bTC) toolStripStatusLabel1.Text = "Ready";
+                else toolStripStatusLabel1.Text = "Database connection error";
             }
-            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void ToolStripMenuItemAbout_Click(object sender, EventArgs e)
@@ -154,6 +154,86 @@ namespace ValidPay
             wnd.ShowDialog();
         }
 
-              
+        private void rCPDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadRcpData wnd = new LoadRcpData(config);
+            wnd.ShowDialog();
+        }
+
+        private void rCPDataToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            OutReestrRcp wnd = new OutReestrRcp(config);
+            wnd.ShowDialog();
+        }
+
+        private void validToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Valid wnd = new Valid(config);
+
+                wnd.MdiParent = this;
+                wnd.Show();
+                wnd.Activate();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void rCPDataToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RCPViewData wnd = new RCPViewData(config);
+
+                wnd.MdiParent = this;
+                wnd.Show();
+                wnd.Activate();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void assistDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AssistViewData wnd = new AssistViewData(config);
+
+                wnd.MdiParent = this;
+                wnd.Show();
+                wnd.Activate();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void belWebDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BelWebViewData wnd = new BelWebViewData(config);
+
+                wnd.MdiParent = this;
+                wnd.Show();
+                wnd.Activate();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.TargetSite + " " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void appMobileDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadMobileAppData wnd = new LoadMobileAppData(config);
+            wnd.ShowDialog();
+        }
+
+        private void pCPaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadPayment wnd = new LoadPayment(config);
+            wnd.ShowDialog();
+        }
+
+        private void pCSaleDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadAmout300 wnd = new LoadAmout300(config);
+            wnd.ShowDialog();
+        }
     }
 }

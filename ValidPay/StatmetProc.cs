@@ -45,6 +45,7 @@ namespace ValidPay
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.Source); }
         }
 
+        [Obsolete]
         private void StatmetProc_Load(object sender, EventArgs e)
         {
             try
@@ -55,7 +56,7 @@ namespace ValidPay
 
                 timer1.Start();
 
-                Thread mThread = new Thread(Execute);
+                Thread mThread = new Thread(start: Execute);
                 mThread.Start();
 
             }
@@ -77,12 +78,12 @@ namespace ValidPay
                 else isecond = (iMsec % 600) / 10;
 
                 if (iMsec < 10)
-                    sTime = string.Format("{0:00} мсек", iMsec);
+                    sTime = string.Format("{0:00} msec", iMsec);
                 else if (iminute > 0)
-                    sTime = string.Format("{0:00}:{1:00} мин", iminute, isecond);
-                else sTime = string.Format("{0:00} сек", isecond);
+                    sTime = string.Format("{0:00}:{1:00} min", iminute, isecond);
+                else sTime = string.Format("{0:00} sec", isecond);
 
-                sPrint = string.Format("Время выполнения: {0}", sTime);
+                sPrint = string.Format("Runtime: {0}", sTime);
                 labelLabel.Text = sPrint;
 
             }
@@ -105,6 +106,7 @@ namespace ValidPay
             e.Cancel = bClose;
         }
 
+        [Obsolete]
         private void Execute()
         {
             string msg;
@@ -115,11 +117,14 @@ namespace ValidPay
                 if (oClass is CValidData)
                 {
                     CValidData g_clBook = (CValidData)oClass;
-              //      List<STValidData> g_listResult;
+                    //      List<STValidData> g_listResult;
 
-                    oData =  g_clBook.GetData((STValidDataParam)oParam);
-                   
-                    bOper = true;
+                    //  oData =  g_clBook.GetData((STValidDataParam)oParam);
+                    DataTable table;
+                    g_clBook.GetTable((STValidDataParam)oParam, out table, out msg);
+
+                    oData = table;
+                      bOper = true;
                     timer1.Stop();
                     bClose = false;
                     DialogResult = DialogResult.OK;
@@ -138,7 +143,7 @@ namespace ValidPay
                         oData = table;
                     }
                     else
-                        MessageBox.Show(msg, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     bOper = true;
                     timer1.Stop();
@@ -159,7 +164,7 @@ namespace ValidPay
                         oData = table;
                     }
                     else
-                        MessageBox.Show(msg, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     bOper = true;
                     timer1.Stop();
@@ -180,7 +185,7 @@ namespace ValidPay
                         oData = table;
                     }
                     else
-                        MessageBox.Show(msg, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     bOper = true;
                     timer1.Stop();

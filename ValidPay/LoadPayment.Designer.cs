@@ -61,7 +61,7 @@
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
             this.buttonExit.TabIndex = 30;
-            this.buttonExit.Text = "Отмена";
+            this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
@@ -71,7 +71,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 29;
-            this.buttonOK.Text = "Загрузить";
+            this.buttonOK.Text = "Load";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -89,7 +89,7 @@
             this.MinimizeBox = false;
             this.Name = "LoadPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Загрузить платежи";
+            this.Text = "Load payment";
             this.Load += new System.EventHandler(this.LoadPayment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

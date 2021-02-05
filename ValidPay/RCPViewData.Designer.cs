@@ -164,7 +164,7 @@
             this.buttonApplay.Name = "buttonApplay";
             this.buttonApplay.Size = new System.Drawing.Size(78, 23);
             this.buttonApplay.TabIndex = 9;
-            this.buttonApplay.Text = "&Применить";
+            this.buttonApplay.Text = "&Apply";
             this.buttonApplay.UseVisualStyleBackColor = true;
             // 
             // dataGridViewBT
@@ -192,7 +192,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "RCPViewData";
-            this.Text = "Данные из РЦП";
+            this.Text = "View RCP Data";
             this.Load += new System.EventHandler(this.RCPViewData_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

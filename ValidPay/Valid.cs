@@ -28,6 +28,8 @@ namespace ValidPay
 
         List<STValidData> list;
 
+        DataTable table;
+
         public Valid(CConfig cf)
         {
             InitializeComponent();
@@ -52,14 +54,26 @@ namespace ValidPay
                 dateTimePickerDE.Value = dtend;
 
                 radioButton1.Checked = true;
-                radioButtonDuble.Checked = true;
-
+                
                 s_index = -1;
                 dataGridViewValid.AllowUserToAddRows = false;
 
                 iRow = 0;
+
+                init_combo();
+
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.Source); }
+        }
+
+        private void init_combo()
+        {
+            try
+            {
+                foreach (MA m_app in config.madata)
+                    comboBoxApp.Items.Add(m_app.Name);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void read_param()
@@ -71,11 +85,17 @@ namespace ValidPay
                 param.dtbegin = new DateTime(dateTimePickerDB.Value.Year, dateTimePickerDB.Value.Month, dateTimePickerDB.Value.Day, 0, 0, 0, 0);
                 param.dtend = new DateTime(dateTimePickerDE.Value.Year, dateTimePickerDE.Value.Month, dateTimePickerDE.Value.Day, 23, 59, 59, 0);
 
+                if (radioButton1.Checked == true) param.orientation = 1;
+                if (radioButton2.Checked == true) param.orientation = 2;
 
-                if (radioButtonDuble.Checked == true) param.type = 1;
-                if (radioButtonNotEq.Checked == true) param.type = 2;
-                if (radioButtonRCPAssist.Checked == true) param.type = 3;
+                string name = comboBoxApp.Text.Trim();
+                foreach (MA s in config.madata)
+                {
+                    if (s.Name == name) param.app_code = s.Code;
+                }
 
+                param.b = false;
+                if (checkBoxVO.Checked == true) param.b = true;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.Source); }
         }
@@ -151,13 +171,13 @@ namespace ValidPay
                 if (iRow > 0)
                 {
                     int index = dataGridViewValid.CurrentCell.RowIndex;
-                    toolStripStatusLabelRow.Text = string.Format("cтрока {0} из {1}", index + 1, iRow);
+                    toolStripStatusLabelRow.Text = string.Format("row {0} from {1}", index + 1, iRow);
                 }
-                else toolStripStatusLabelRow.Text = string.Format("нет данных");
+                else toolStripStatusLabelRow.Text = string.Format("no data");
 
                 statusStrip1.Refresh();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, ex.Source); }
+            catch (Exception ) {  }
         }
 
         private void buttonPermit_Click(object sender, EventArgs e)
@@ -166,7 +186,8 @@ namespace ValidPay
             {
                 read_param();
 
-                dataGridViewValid.Rows.Clear();
+                //dataGridViewValid.Rows.Clear();
+                dataGridViewValid.DataSource = null;
 
                 iRow = 0;
 
@@ -181,27 +202,28 @@ namespace ValidPay
                 if (process.ShowDialog() == DialogResult.Cancel)
                 {
                     panel1.Enabled = true;
-                    toolStripStatusLabelTime.Text = "Отмена";
+                    toolStripStatusLabelTime.Text = "canceled";
                 }
                 else
                 {
                     string s = process.sTime;
                     toolStripStatusLabelTime.Text = s;
-                    list = process.oData as List<STValidData>;
-                    iRow = list.Count;
+                    table = process.oData as DataTable;
+                    iRow = table.Rows.Count;
 
-                    ListCompareBPRound_Averpcall clC = new ListCompareBPRound_Averpcall();
-                    list.Sort(clC);
+                    //ListCompareBPRound_Averpcall clC = new ListCompareBPRound_Averpcall();
+                    //list.Sort(clC);
 
                     if (iRow > 0)
                     {
-                        dataGridViewValid.Rows.Add(iRow);
-                        backgroundWorkerGrid.RunWorkerAsync();
+                        dataGridViewValid.DataSource = table;
+                        //dataGridViewValid.Rows.Add(iRow);
+                        //backgroundWorkerGrid.RunWorkerAsync();
                     }
                  //   else
                  //   {
                  //       on_print();
-                        //            complete();
+                                    complete();
                 //    }
 
                     on_print();
@@ -238,24 +260,24 @@ namespace ValidPay
 
         private void OnExcel()
         {
-            DataTable table = new DataTable();
-            for (int iCol = 0; iCol < dataGridViewValid.Columns.Count; iCol++)
-            {
-                table.Columns.Add(dataGridViewValid.Columns[iCol].Name);
-            }
+           // DataTable table = new DataTable();
+           // for (int iCol = 0; iCol < dataGridViewValid.Columns.Count; iCol++)
+           // {
+           //     table.Columns.Add(dataGridViewValid.Columns[iCol].Name);
+           // }
 
-            foreach (DataGridViewRow row in dataGridViewValid.Rows)
-            {
+           // foreach (DataGridViewRow row in dataGridViewValid.Rows)
+           // {
 
-                DataRow datarw = table.NewRow();
+           //     DataRow datarw = table.NewRow();
 
-                for (int iCol = 0; iCol < dataGridViewValid.Columns.Count; iCol++)
-                {
-                    datarw[iCol] = row.Cells[iCol].Value;
-                }
+           //     for (int iCol = 0; iCol < dataGridViewValid.Columns.Count; iCol++)
+           //     {
+           //         datarw[iCol] = row.Cells[iCol].Value;
+           //     }
 
-                table.Rows.Add(datarw);
-            }
+           //     table.Rows.Add(datarw);
+           // }
 
             if (table.Rows.Count > 0) ExportTable(table);
         }
@@ -316,7 +338,11 @@ namespace ValidPay
         {
             OnExcel();
         }
-       
+
+        private void dataGridViewValid_SelectionChanged(object sender, EventArgs e)
+        {
+            on_print();
+        }
     }
 
 

@@ -164,7 +164,7 @@
             this.buttonApplay.Name = "buttonApplay";
             this.buttonApplay.Size = new System.Drawing.Size(78, 23);
             this.buttonApplay.TabIndex = 9;
-            this.buttonApplay.Text = "&Применить";
+            this.buttonApplay.Text = "&Apply";
             this.buttonApplay.UseVisualStyleBackColor = true;
             this.buttonApplay.Click += new System.EventHandler(this.buttonApplay_Click);
             // 
@@ -193,7 +193,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "AssistViewData";
-            this.Text = "Реестр Assist";
+            this.Text = "View Assist Data";
             this.Load += new System.EventHandler(this.AssistViewData_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

@@ -56,6 +56,21 @@
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemLoadReestr = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rCPDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.appMobileDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pCPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pCSaleDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.rCPDataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.assistDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.belWebDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bGPBMobileDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportRCPDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rCPDataToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,9 +94,13 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem,
+            this.viewToolStripMenuItem,
+            this.validToolStripMenuItem,
+            this.exportRCPDataToolStripMenuItem,
+            this.ToolStripMenuItemAbout,
             this.ToolStripMenuItemData,
             this.ToolStripMenuItemValid,
-            this.ToolStripMenuItemAbout,
             this.updateToolStripMenuItem,
             this.ToolStripMenuItemLoadReestr});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -103,6 +122,7 @@
             this.ToolStripMenuItemData.Name = "ToolStripMenuItemData";
             this.ToolStripMenuItemData.Size = new System.Drawing.Size(62, 20);
             this.ToolStripMenuItemData.Text = "Данные";
+            this.ToolStripMenuItemData.Visible = false;
             // 
             // ToolStripMenuItemRCPData
             // 
@@ -112,7 +132,7 @@
             this.toolStripSeparator2,
             this.ToolStripMenuItemOutReestrRCP});
             this.ToolStripMenuItemRCPData.Name = "ToolStripMenuItemRCPData";
-            this.ToolStripMenuItemRCPData.Size = new System.Drawing.Size(178, 22);
+            this.ToolStripMenuItemRCPData.Size = new System.Drawing.Size(180, 22);
             this.ToolStripMenuItemRCPData.Text = "Данные из РЦП";
             // 
             // ToolStripMenuItemLoadRcpData
@@ -147,7 +167,7 @@
             this.ToolStripMenuItemDataWebPayView,
             this.ToolStripMenuItemDataWebPayLoad});
             this.PayToolStripMenuItemDataWebPay.Name = "PayToolStripMenuItemDataWebPay";
-            this.PayToolStripMenuItemDataWebPay.Size = new System.Drawing.Size(178, 22);
+            this.PayToolStripMenuItemDataWebPay.Size = new System.Drawing.Size(180, 22);
             this.PayToolStripMenuItemDataWebPay.Text = "Данные от WebPay";
             this.PayToolStripMenuItemDataWebPay.Visible = false;
             // 
@@ -172,7 +192,7 @@
             this.ToolStripMenuItemLoadAssistCsv,
             this.ToolStripMenuItemAssistViewData});
             this.ToolStripMenuItemMTBankData.Name = "ToolStripMenuItemMTBankData";
-            this.ToolStripMenuItemMTBankData.Size = new System.Drawing.Size(178, 22);
+            this.ToolStripMenuItemMTBankData.Size = new System.Drawing.Size(180, 22);
             this.ToolStripMenuItemMTBankData.Text = "Данные от Assist";
             // 
             // ToolStripMenuItemLoadMTBankData
@@ -202,7 +222,7 @@
             this.ToolStripMenuItemLoadBelWebBankData,
             this.ToolStripMenuItemBelWebViewData});
             this.ОтToolStripMenuItemReestrBelWeb.Name = "ОтToolStripMenuItemReestrBelWeb";
-            this.ОтToolStripMenuItemReestrBelWeb.Size = new System.Drawing.Size(178, 22);
+            this.ОтToolStripMenuItemReestrBelWeb.Size = new System.Drawing.Size(180, 22);
             this.ОтToolStripMenuItemReestrBelWeb.Text = "Реестр БЕЛВЭБ";
             // 
             // ToolStripMenuItemLoadBelWebBankData
@@ -222,14 +242,14 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(175, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // платежиToolStripMenuItem
             // 
             this.платежиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemLoadPayment});
             this.платежиToolStripMenuItem.Name = "платежиToolStripMenuItem";
-            this.платежиToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.платежиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.платежиToolStripMenuItem.Text = "Платежи";
             // 
             // ToolStripMenuItemLoadPayment
@@ -244,7 +264,7 @@
             this.реализацияИзПЦToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoadDrivePayToolStripMenuItem});
             this.реализацияИзПЦToolStripMenuItem.Name = "реализацияИзПЦToolStripMenuItem";
-            this.реализацияИзПЦToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.реализацияИзПЦToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.реализацияИзПЦToolStripMenuItem.Text = "Реализация из ПЦ";
             // 
             // LoadDrivePayToolStripMenuItem
@@ -259,13 +279,14 @@
             this.ToolStripMenuItemValid.Name = "ToolStripMenuItemValid";
             this.ToolStripMenuItemValid.Size = new System.Drawing.Size(58, 20);
             this.ToolStripMenuItemValid.Text = "Сверка";
+            this.ToolStripMenuItemValid.Visible = false;
             this.ToolStripMenuItemValid.Click += new System.EventHandler(this.ToolStripMenuItemValid_Click);
             // 
             // ToolStripMenuItemAbout
             // 
             this.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout";
-            this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(94, 20);
-            this.ToolStripMenuItemAbout.Text = "О программе";
+            this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(108, 20);
+            this.ToolStripMenuItemAbout.Text = "&About ValidPay...";
             this.ToolStripMenuItemAbout.Click += new System.EventHandler(this.ToolStripMenuItemAbout_Click);
             // 
             // updateToolStripMenuItem
@@ -281,7 +302,119 @@
             this.ToolStripMenuItemLoadReestr.Name = "ToolStripMenuItemLoadReestr";
             this.ToolStripMenuItemLoadReestr.Size = new System.Drawing.Size(122, 20);
             this.ToolStripMenuItemLoadReestr.Text = "Загрузить реестры";
+            this.ToolStripMenuItemLoadReestr.Visible = false;
             this.ToolStripMenuItemLoadReestr.Click += new System.EventHandler(this.ToolStripMenuItemLoadReestr_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rCPDataToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.appMobileDataToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.pCPaymentToolStripMenuItem,
+            this.pCSaleDataToolStripMenuItem});
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.loadToolStripMenuItem.Text = "&Load";
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rCPDataToolStripMenuItem1,
+            this.assistDataToolStripMenuItem,
+            this.belWebDataToolStripMenuItem,
+            this.bGPBMobileDataToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // validToolStripMenuItem
+            // 
+            this.validToolStripMenuItem.Name = "validToolStripMenuItem";
+            this.validToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.validToolStripMenuItem.Text = "&Valid";
+            this.validToolStripMenuItem.Click += new System.EventHandler(this.validToolStripMenuItem_Click);
+            // 
+            // rCPDataToolStripMenuItem
+            // 
+            this.rCPDataToolStripMenuItem.Name = "rCPDataToolStripMenuItem";
+            this.rCPDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rCPDataToolStripMenuItem.Text = "RCP Data";
+            this.rCPDataToolStripMenuItem.Click += new System.EventHandler(this.rCPDataToolStripMenuItem_Click);
+            // 
+            // appMobileDataToolStripMenuItem
+            // 
+            this.appMobileDataToolStripMenuItem.Name = "appMobileDataToolStripMenuItem";
+            this.appMobileDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.appMobileDataToolStripMenuItem.Text = "App Mobile Data";
+            this.appMobileDataToolStripMenuItem.Click += new System.EventHandler(this.appMobileDataToolStripMenuItem_Click);
+            // 
+            // pCPaymentToolStripMenuItem
+            // 
+            this.pCPaymentToolStripMenuItem.Name = "pCPaymentToolStripMenuItem";
+            this.pCPaymentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pCPaymentToolStripMenuItem.Text = "PC Payment";
+            this.pCPaymentToolStripMenuItem.Click += new System.EventHandler(this.pCPaymentToolStripMenuItem_Click);
+            // 
+            // pCSaleDataToolStripMenuItem
+            // 
+            this.pCSaleDataToolStripMenuItem.Name = "pCSaleDataToolStripMenuItem";
+            this.pCSaleDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pCSaleDataToolStripMenuItem.Text = "PC Sale Data";
+            this.pCSaleDataToolStripMenuItem.Click += new System.EventHandler(this.pCSaleDataToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // rCPDataToolStripMenuItem1
+            // 
+            this.rCPDataToolStripMenuItem1.Name = "rCPDataToolStripMenuItem1";
+            this.rCPDataToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.rCPDataToolStripMenuItem1.Text = "RCP Data";
+            this.rCPDataToolStripMenuItem1.Click += new System.EventHandler(this.rCPDataToolStripMenuItem1_Click);
+            // 
+            // assistDataToolStripMenuItem
+            // 
+            this.assistDataToolStripMenuItem.Name = "assistDataToolStripMenuItem";
+            this.assistDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assistDataToolStripMenuItem.Text = "Assist Data";
+            this.assistDataToolStripMenuItem.Click += new System.EventHandler(this.assistDataToolStripMenuItem_Click);
+            // 
+            // belWebDataToolStripMenuItem
+            // 
+            this.belWebDataToolStripMenuItem.Name = "belWebDataToolStripMenuItem";
+            this.belWebDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.belWebDataToolStripMenuItem.Text = "BelWeb Data";
+            this.belWebDataToolStripMenuItem.Click += new System.EventHandler(this.belWebDataToolStripMenuItem_Click);
+            // 
+            // bGPBMobileDataToolStripMenuItem
+            // 
+            this.bGPBMobileDataToolStripMenuItem.Name = "bGPBMobileDataToolStripMenuItem";
+            this.bGPBMobileDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGPBMobileDataToolStripMenuItem.Text = "BGPB Mobile Data";
+            // 
+            // exportRCPDataToolStripMenuItem
+            // 
+            this.exportRCPDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rCPDataToolStripMenuItem2});
+            this.exportRCPDataToolStripMenuItem.Name = "exportRCPDataToolStripMenuItem";
+            this.exportRCPDataToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.exportRCPDataToolStripMenuItem.Text = "&Export";
+            // 
+            // rCPDataToolStripMenuItem2
+            // 
+            this.rCPDataToolStripMenuItem2.Name = "rCPDataToolStripMenuItem2";
+            this.rCPDataToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.rCPDataToolStripMenuItem2.Text = "RCP Data";
+            this.rCPDataToolStripMenuItem2.Click += new System.EventHandler(this.rCPDataToolStripMenuItem2_Click);
             // 
             // Form1
             // 
@@ -334,6 +467,21 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemOutReestrRCP;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemLoadReestr;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rCPDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem appMobileDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem pCPaymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pCSaleDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rCPDataToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem assistDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem belWebDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bGPBMobileDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportRCPDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rCPDataToolStripMenuItem2;
     }
 }
 

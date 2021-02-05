@@ -100,7 +100,7 @@
             // 
             this.toolStripStatusLabelProbel.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.toolStripStatusLabelProbel.Name = "toolStripStatusLabelProbel";
-            this.toolStripStatusLabelProbel.Size = new System.Drawing.Size(871, 17);
+            this.toolStripStatusLabelProbel.Size = new System.Drawing.Size(902, 17);
             this.toolStripStatusLabelProbel.Spring = true;
             // 
             // toolStripStatusLabelPC
@@ -150,7 +150,7 @@
             this.buttonApplay.Name = "buttonApplay";
             this.buttonApplay.Size = new System.Drawing.Size(78, 23);
             this.buttonApplay.TabIndex = 9;
-            this.buttonApplay.Text = "&Применить";
+            this.buttonApplay.Text = "&Apply";
             this.buttonApplay.UseVisualStyleBackColor = true;
             // 
             // dataGridViewBT
@@ -194,7 +194,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "BelWebViewData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Реестр БелВэб";
+            this.Text = "View BelWeb Data";
             this.Load += new System.EventHandler(this.BelWebViewData_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

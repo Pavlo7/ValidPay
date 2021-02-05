@@ -40,7 +40,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.Text = "cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -70,7 +70,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Обработка запроса...";
+            this.Text = "Request processing...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StatmetProc_FormClosing);
             this.Load += new System.EventHandler(this.StatmetProc_Load);
             this.ResumeLayout(false);

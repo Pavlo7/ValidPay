@@ -42,26 +42,17 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButtonRCPAssist = new System.Windows.Forms.RadioButton();
-            this.radioButtonNotEq = new System.Windows.Forms.RadioButton();
-            this.radioButtonDuble = new System.Windows.Forms.RadioButton();
-            this.buttonPermit = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxVO = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxApp = new System.Windows.Forms.ComboBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.buttonPermit = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dateTimePickerDE = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerDB = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridViewValid = new System.Windows.Forms.DataGridView();
-            this.RRN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmtCodeFRM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AzsCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountRCP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountWebPay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExcelToolStripMenuItemExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
@@ -69,7 +60,6 @@
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValid)).BeginInit();
@@ -124,7 +114,7 @@
             this.ToolStripMenuItemBookTransact});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1121, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1232, 24);
             this.menuStrip.TabIndex = 28;
             this.menuStrip.Text = "menuStrip1";
             this.menuStrip.Visible = false;
@@ -134,14 +124,14 @@
             this.ToolStripMenuItemBookTransact.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.экспортВExcelToolStripMenuItem});
             this.ToolStripMenuItemBookTransact.Name = "ToolStripMenuItemBookTransact";
-            this.ToolStripMenuItemBookTransact.Size = new System.Drawing.Size(58, 20);
-            this.ToolStripMenuItemBookTransact.Text = "Сверка";
+            this.ToolStripMenuItemBookTransact.Size = new System.Drawing.Size(70, 20);
+            this.ToolStripMenuItemBookTransact.Text = "Valid data";
             // 
             // экспортВExcelToolStripMenuItem
             // 
             this.экспортВExcelToolStripMenuItem.Name = "экспортВExcelToolStripMenuItem";
-            this.экспортВExcelToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.экспортВExcelToolStripMenuItem.Text = "Экспорт в Excel";
+            this.экспортВExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.экспортВExcelToolStripMenuItem.Text = "Export to Excel";
             this.экспортВExcelToolStripMenuItem.Click += new System.EventHandler(this.экспортВExcelToolStripMenuItem_Click);
             // 
             // backgroundWorkerGrid
@@ -158,163 +148,132 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(253, 602);
+            this.panel1.Size = new System.Drawing.Size(218, 602);
             this.panel1.TabIndex = 30;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.buttonPermit);
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(5, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(242, 349);
+            this.groupBox1.Size = new System.Drawing.Size(202, 297);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.radioButtonRCPAssist);
-            this.groupBox4.Controls.Add(this.radioButtonNotEq);
-            this.groupBox4.Controls.Add(this.radioButtonDuble);
+            this.groupBox4.Controls.Add(this.checkBoxVO);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.comboBoxApp);
+            this.groupBox4.Controls.Add(this.radioButton2);
+            this.groupBox4.Controls.Add(this.radioButton1);
             this.groupBox4.Location = new System.Drawing.Point(4, 94);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(227, 108);
+            this.groupBox4.Size = new System.Drawing.Size(185, 158);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Тип";
+            this.groupBox4.Text = "Options";
             // 
-            // radioButtonRCPAssist
+            // checkBoxVO
             // 
-            this.radioButtonRCPAssist.AutoSize = true;
-            this.radioButtonRCPAssist.Location = new System.Drawing.Point(14, 72);
-            this.radioButtonRCPAssist.Name = "radioButtonRCPAssist";
-            this.radioButtonRCPAssist.Size = new System.Drawing.Size(189, 17);
-            this.radioButtonRCPAssist.TabIndex = 2;
-            this.radioButtonRCPAssist.TabStop = true;
-            this.radioButtonRCPAssist.Text = "несовпадения сумм РЦП - Assist";
-            this.radioButtonRCPAssist.UseVisualStyleBackColor = true;
-                        // 
-            // radioButtonNotEq
+            this.checkBoxVO.AutoSize = true;
+            this.checkBoxVO.Location = new System.Drawing.Point(14, 126);
+            this.checkBoxVO.Name = "checkBoxVO";
+            this.checkBoxVO.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxVO.TabIndex = 43;
+            this.checkBoxVO.Text = "view only discrepancies";
+            this.checkBoxVO.UseVisualStyleBackColor = true;
             // 
-            this.radioButtonNotEq.AutoSize = true;
-            this.radioButtonNotEq.Location = new System.Drawing.Point(14, 49);
-            this.radioButtonNotEq.Name = "radioButtonNotEq";
-            this.radioButtonNotEq.Size = new System.Drawing.Size(208, 17);
-            this.radioButtonNotEq.TabIndex = 1;
-            this.radioButtonNotEq.TabStop = true;
-            this.radioButtonNotEq.Text = "несовпадения сумм РЦП - WEBPAY";
-            this.radioButtonNotEq.UseVisualStyleBackColor = true;
+            // label1
             // 
-            // radioButtonDuble
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 13);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "Select application";
             // 
-            this.radioButtonDuble.AutoSize = true;
-            this.radioButtonDuble.Location = new System.Drawing.Point(14, 23);
-            this.radioButtonDuble.Name = "radioButtonDuble";
-            this.radioButtonDuble.Size = new System.Drawing.Size(141, 17);
-            this.radioButtonDuble.TabIndex = 0;
-            this.radioButtonDuble.TabStop = true;
-            this.radioButtonDuble.Text = "дубликаты RRN в РЦП";
-            this.radioButtonDuble.UseVisualStyleBackColor = true;
+            // comboBoxApp
             // 
-            // buttonPermit
+            this.comboBoxApp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxApp.FormattingEnabled = true;
+            this.comboBoxApp.Location = new System.Drawing.Point(14, 88);
+            this.comboBoxApp.Name = "comboBoxApp";
+            this.comboBoxApp.Size = new System.Drawing.Size(154, 21);
+            this.comboBoxApp.TabIndex = 41;
             // 
-            this.buttonPermit.Location = new System.Drawing.Point(161, 311);
-            this.buttonPermit.Name = "buttonPermit";
-            this.buttonPermit.Size = new System.Drawing.Size(75, 23);
-            this.buttonPermit.TabIndex = 2;
-            this.buttonPermit.Text = "Поиск";
-            this.buttonPermit.UseVisualStyleBackColor = true;
-            this.buttonPermit.Click += new System.EventHandler(this.buttonPermit_Click);
+            // radioButton2
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Location = new System.Drawing.Point(6, 223);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(225, 67);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Система";
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(14, 42);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(145, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "App Mobele to RCP Data";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(14, 23);
+            this.radioButton1.Location = new System.Drawing.Point(14, 19);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(74, 17);
+            this.radioButton1.Size = new System.Drawing.Size(145, 17);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Drive&&Pay";
+            this.radioButton1.Text = "RCP Data to App Mobele";
             this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // buttonPermit
+            // 
+            this.buttonPermit.Location = new System.Drawing.Point(114, 258);
+            this.buttonPermit.Name = "buttonPermit";
+            this.buttonPermit.Size = new System.Drawing.Size(75, 23);
+            this.buttonPermit.TabIndex = 2;
+            this.buttonPermit.Text = "Search";
+            this.buttonPermit.UseVisualStyleBackColor = true;
+            this.buttonPermit.Click += new System.EventHandler(this.buttonPermit_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dateTimePickerDE);
             this.groupBox2.Controls.Add(this.dateTimePickerDB);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(7, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(196, 74);
+            this.groupBox2.Size = new System.Drawing.Size(182, 74);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Период";
+            this.groupBox2.Text = "Timespan";
             // 
             // dateTimePickerDE
             // 
-            this.dateTimePickerDE.Location = new System.Drawing.Point(36, 40);
+            this.dateTimePickerDE.Location = new System.Drawing.Point(11, 45);
             this.dateTimePickerDE.Name = "dateTimePickerDE";
             this.dateTimePickerDE.Size = new System.Drawing.Size(154, 20);
             this.dateTimePickerDE.TabIndex = 3;
             // 
             // dateTimePickerDB
             // 
-            this.dateTimePickerDB.Location = new System.Drawing.Point(36, 16);
+            this.dateTimePickerDB.Location = new System.Drawing.Point(11, 19);
             this.dateTimePickerDB.Name = "dateTimePickerDB";
             this.dateTimePickerDB.Size = new System.Drawing.Size(154, 20);
             this.dateTimePickerDB.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "по";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "с";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dataGridViewValid);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(253, 0);
+            this.panel2.Location = new System.Drawing.Point(218, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(979, 602);
+            this.panel2.Size = new System.Drawing.Size(1014, 602);
             this.panel2.TabIndex = 31;
             // 
             // dataGridViewValid
             // 
             this.dataGridViewValid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewValid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewValid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RRN,
-            this.Date,
-            this.EmtCodeFRM,
-            this.AzsCode,
-            this.AmountRCP,
-            this.AmountWebPay,
-            this.Comments});
             this.dataGridViewValid.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridViewValid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewValid.Location = new System.Drawing.Point(0, 0);
@@ -322,63 +281,22 @@
             this.dataGridViewValid.Name = "dataGridViewValid";
             this.dataGridViewValid.ReadOnly = true;
             this.dataGridViewValid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewValid.Size = new System.Drawing.Size(979, 602);
+            this.dataGridViewValid.Size = new System.Drawing.Size(1014, 602);
             this.dataGridViewValid.TabIndex = 38;
-            // 
-            // RRN
-            // 
-            this.RRN.HeaderText = "RRN";
-            this.RRN.Name = "RRN";
-            this.RRN.ReadOnly = true;
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Дата";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // EmtCodeFRM
-            // 
-            this.EmtCodeFRM.HeaderText = "Эмитент";
-            this.EmtCodeFRM.Name = "EmtCodeFRM";
-            this.EmtCodeFRM.ReadOnly = true;
-            // 
-            // AzsCode
-            // 
-            this.AzsCode.HeaderText = "АЗС";
-            this.AzsCode.Name = "AzsCode";
-            this.AzsCode.ReadOnly = true;
-            // 
-            // AmountRCP
-            // 
-            this.AmountRCP.HeaderText = "Сумма РЦП";
-            this.AmountRCP.Name = "AmountRCP";
-            this.AmountRCP.ReadOnly = true;
-            // 
-            // AmountWebPay
-            // 
-            this.AmountWebPay.HeaderText = "Сумма в другой системе";
-            this.AmountWebPay.Name = "AmountWebPay";
-            this.AmountWebPay.ReadOnly = true;
-            // 
-            // Comments
-            // 
-            this.Comments.HeaderText = "Комментарий";
-            this.Comments.Name = "Comments";
-            this.Comments.ReadOnly = true;
+            this.dataGridViewValid.SelectionChanged += new System.EventHandler(this.dataGridViewValid_SelectionChanged);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExcelToolStripMenuItemExcel});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(151, 26);
             // 
             // ExcelToolStripMenuItemExcel
             // 
             this.ExcelToolStripMenuItemExcel.Name = "ExcelToolStripMenuItemExcel";
-            this.ExcelToolStripMenuItemExcel.Size = new System.Drawing.Size(157, 22);
-            this.ExcelToolStripMenuItemExcel.Text = "Экспорт в Excel";
+            this.ExcelToolStripMenuItemExcel.Size = new System.Drawing.Size(150, 22);
+            this.ExcelToolStripMenuItemExcel.Text = "Export to Excel";
             this.ExcelToolStripMenuItemExcel.Click += new System.EventHandler(this.ExcelToolStripMenuItemExcel_Click);
             // 
             // Valid
@@ -392,7 +310,7 @@
             this.Controls.Add(this.menuStrip);
             this.Name = "Valid";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Сверка данных";
+            this.Text = "Valid data";
             this.Load += new System.EventHandler(this.Valid_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -402,10 +320,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -430,26 +345,17 @@
         private System.Windows.Forms.DataGridView dataGridViewValid;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonPermit;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DateTimePicker dateTimePickerDE;
         private System.Windows.Forms.DateTimePicker dateTimePickerDB;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radioButtonNotEq;
-        private System.Windows.Forms.RadioButton radioButtonDuble;
         private System.Windows.Forms.ToolStripMenuItem экспортВExcelToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ExcelToolStripMenuItemExcel;
-        private System.Windows.Forms.RadioButton radioButtonRCPAssist;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RRN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmtCodeFRM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AzsCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AmountRCP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AmountWebPay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comments;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.ComboBox comboBoxApp;
+        private System.Windows.Forms.CheckBox checkBoxVO;
+        private System.Windows.Forms.Label label1;
     }
 }
